@@ -20,12 +20,9 @@ int main()
             req = max;
             max = a;
         }
-        else
+        else if (a > req)
         {
-            if (a > req)
-            {
-                req = a;
-            }
+            req = a;
         }
     }
 

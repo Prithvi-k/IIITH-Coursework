@@ -2,7 +2,7 @@
 
 /*
 
-If a four digit number is input through the keyboard, write a program to reverse the number.
+If a n-digit number is input through the keyboard, write a program to reverse the number.
 
 */
 

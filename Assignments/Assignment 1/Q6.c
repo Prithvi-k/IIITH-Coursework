@@ -19,7 +19,7 @@ int main()
     while (i-- > 0)
     {
         int a = 0;
-        char str[] = "*";
+        char *str = "*";
         for (a = 0; a <= i; a++)
         {
             printf("%s", str);
