@@ -1,0 +1,1 @@
+{"name":"Local: problem_1","url":"/home/prithvi/Documents/CPro/Assignments/Assignment 2/problem_1.c","tests":[{"id":1670866169523,"input":"4\n2 3\n10 20\n1 2\n1 4","output":"19\n110\n11\n17"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/prithvi/Documents/CPro/Assignments/Assignment 2/problem_1.c","group":"local","local":true}
