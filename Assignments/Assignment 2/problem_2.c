@@ -12,18 +12,22 @@ int main()
 
         if (M < 1 || S < 1 || O < 2)
         {
-            oreoShakes = 0;
+            oreoShakes = 0; // if ingredients not sufficient
+        }
+        // takes least of M, S, O (constraint)
+        else if (M < S && M < (O / 2))
+        {
+            oreoShakes = M;
+        }
+        else if (S < M && S < (O / 2))
+        {
+            oreoShakes = S;
         }
         else
         {
-            while (M > 0 && S > 0 && O > 0)
-            {
-                M -= 1;
-                S -= 1;
-                O -= 2;
-                oreoShakes += 1;
-            }
+            oreoShakes = (O / 2);
         }
+
         printf("%d\n", oreoShakes);
     }
 

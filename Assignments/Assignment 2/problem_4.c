@@ -13,9 +13,15 @@ int main()
         for (int j = 0; j < N; j++)
         {
             scanf("%d", &arr[j]);
-            sum += arr[j];
+            sum += arr[j]; // finding total sum of all elements of array
         }
 
+        /*
+        Switching `1` to `-1` or `-1` to `1`
+        essentially changes the value of sum by 2
+        hence if the sum itself is not divisible by 2,
+        no changes can make the sum = 0
+         */
         if ((sum % 2) != 0)
         {
             result = -1;
