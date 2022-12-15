@@ -10,7 +10,10 @@ int main()
     second_ptr = &ptr;
 
     printf("var = %d\n", var);
-    
+    printf("value of var with ptr = %d\n", *ptr);
+    printf("value of var with second_ptr = %d\n", **second_ptr);
+
+    // one `*` is analogous to 'removing' one `&`
 
     return 0;
 }

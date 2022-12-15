@@ -7,13 +7,15 @@ int main()
 
     for (int i = 0; i < T; i++)
     {
-        int C, count = 0;
+        int C, count = 0, flag = 0;
         long double A, N;
         scanf("%Lf %Lf %d", &A, &N, &C);
 
         long double div = (A / N) * 10;
+        div = div - (int)div;
+        // printf("%Lf / %Lf = %Lf\n", A, N, div);
 
-        while (count <= 10000001)
+        while (count < N)
         {
             if (count == 0)
             {
@@ -26,17 +28,18 @@ int main()
 
             if ((int)div == C)
             {
+
                 printf("%d\n", (count + 1));
+                flag = 1;
                 break;
             }
 
-            if (count == (10000000))
-            {
-                printf("-1\n");
-                break;
-            }
             div = div - (int)div;
             count++;
+        }
+        if (flag == 0)
+        {
+            printf("-1\n");
         }
     }
 
