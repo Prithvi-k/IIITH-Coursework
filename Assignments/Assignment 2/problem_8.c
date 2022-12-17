@@ -7,34 +7,33 @@ int main()
 
     for (int i = 0; i < T; i++)
     {
-        int C, count = 0, flag = 0;
-        long double A, N;
-        scanf("%Lf %Lf %d", &A, &N, &C);
+        int A, N, C, count = 0, flag = 0, decimal;
+        scanf("%d %d %d", &A, &N, &C);
 
-        long double div = (A / N) * 10;
-        div = div - (int)div;
-        // printf("%Lf / %Lf = %Lf\n", A, N, div);
-
-        while (count < N)
+        // A = A % N;
+        // printf("A = %d\n", A);
+        if (A < N)
         {
-            if (count == 0)
-            {
-                div = div;
-            }
-            else
-            {
-                div = div * 10;
-            }
+            A = (A * 10);
+            // printf("A = %d\n", A);
+            count++;
+        }
 
-            if ((int)div == C)
-            {
+        for (int j = 0; j < (N+10); j++)
+        {
 
-                printf("%d\n", (count + 1));
+            decimal = (A / N);
+            // printf("Decimal = %d\n", decimal);
+            if (count != 0 && decimal == C)
+            {
+                printf("%d\n", count);
                 flag = 1;
                 break;
             }
-
-            div = div - (int)div;
+            A = (A % N);
+            // printf("A = %d\n", A);
+            A = (A * 10);
+            // printf("A = %d\n", A);
             count++;
         }
         if (flag == 0)
