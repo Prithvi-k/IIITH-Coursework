@@ -13,6 +13,9 @@ int main()
 
     printf("%p %p %p\n", ptr, ptr + 1, ptr + 2);
     printf("%p %p %p\n", *ptr, *(ptr + 1), *(ptr + 2));
+    // ptr == *ptr -> pointer to first element of first array
+
+    // value
     printf("%d %d %d\n", **ptr, **(ptr + 1), **(ptr + 2));
     printf("%d %d %d\n", **ptr, *(*(ptr + 1) + 2), *(*(ptr + 2) + 3));
     printf("%d %d %d\n", ptr[0][0], ptr[1][2], ptr[2][3]);
