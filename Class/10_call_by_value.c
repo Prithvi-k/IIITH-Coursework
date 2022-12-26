@@ -1,10 +1,11 @@
 #include <stdio.h>
 
-void swap(int x, int y)
+void swap(int a, int b)
 {
-    int temp = x;
-    x = y;
-    y = temp;
+    int temp = a;
+    a = b;
+    b = temp;
+    return a, b;
 }
 
 int main()

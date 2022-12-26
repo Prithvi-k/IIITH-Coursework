@@ -2,7 +2,7 @@
 
 int main()
 {
-    int a[5] = {1, 2, 3, 4, 5};
+    int a[5] = {11, 21, 31, 41, 51};
     int *ptr = a;
     // int *ptr = &a[0]; // same as above
 

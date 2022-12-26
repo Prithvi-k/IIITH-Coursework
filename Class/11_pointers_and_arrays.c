@@ -9,5 +9,7 @@ int main()
     // ptr == &a[0] == a == &a
     printf("ptr : %p, &a[0] : %p, a : %p, &a : %p\n", ptr, &a[0], a, &a);
 
+    // `&a[n]` gives address of element at nth index of array
+
     return 0;
 }
