@@ -50,3 +50,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+Class/1_increment
+.gitignore
+Class/14_factorial_recursion
+Class/14_fibonacci_recursion
+Class/16_file
+Class/15_euclids_gcd
+Class/14_combinations_recursion
+.vscode/launch.json
+.vscode/c_cpp_properties.json
+.vscode/launch.json
