@@ -3,9 +3,7 @@
 
 int main()
 {
-    int *arr;
-
-    arr = (int *)malloc(10 * (sizeof(int)));
+    int *arr = (int *)malloc(10 * (sizeof(int)));
 
     for (int i = 0; i < 10; i++)
     {
