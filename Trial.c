@@ -1,52 +1,38 @@
 #include <stdio.h>
-#include <unistd.h>
 
-/*
+int find_element(int n, int arr[n], int index, int x, int position)
+{
+    position++;
+    if (arr[index] == x) // index represents index which will iterate over length of array
+    {
+        return position;
+    }
+    else if (position == n)
+    {
+        return -1;
+    }
+    else
+    {
+        return find_element((n - 1), arr, (index + 1), x, position);
+    }
 
-Write a program to print the following pattern:
+    return x;
+}
 
-*
-**
-***
-****
-*****
-******
-******
-*****
-****
-***
-**
-*
-
-*/
 int main()
 {
-    int a, a1, a2, i, j;
+    int n, x, result, position = 0, index = 0;
+    scanf("%d", &n); // length of array
+    scanf("%d", &x); // element to find
 
-    printf("Please enter a number: ");
-    scanf("%d", &a);
-
-    a1 = a;
-    a2 = a;
-
-    for (int i = 0; i < a; i++)
+    int array[n];
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < i; i++)
-        {
-            printf("Chirag OP");
-        }
-        printf("\n");
+        scanf("%d", &array[i]);
     }
 
-    for (int i = a - 1; i >= 1; i--)
-    {
-        for (int j = 0; j < i; i++)
-        {
-            printf("Chirag OP");
-            sleep(5);
-        }
-        printf("\n");
-    }
+    result = find_element(n, array, index, x, position);
+    printf("%d\n", result);
 
     return 0;
 }
