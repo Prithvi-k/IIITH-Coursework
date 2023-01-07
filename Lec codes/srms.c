@@ -88,6 +88,7 @@ int main()
                "\t         1 New Customer\n"
                "\t         2 Receipts by Customer\n"
                "\t         3 Total Amount by Customer\n"
+               "\t         4 Total Revenue on a particular day\n"
                "\tStats: %d Customers | %d Reciepts\n"
                "-------------------------------------------------------------------\n"
                "Enter Option: ",
@@ -172,6 +173,20 @@ int main()
                 }
                 printf("Total Amount: %d\n", sum);
             }
+
+        case 4:
+            int sum1 = 0;
+            printf("Enter Date: ");
+            scanf("%d", &p);
+            for (int i = 0; i < db.reciept_count; i++)
+            {
+                if (db.reciepts[i].time == p)
+                {
+                    sum1 += db.reciepts[i].value;
+                }
+            }
+            printf("Total Amount: %d\n", sum1);
+            break;
 
         default:
             break;
