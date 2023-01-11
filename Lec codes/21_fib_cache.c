@@ -3,7 +3,7 @@
 int MAX_CACHE = 100;
 
 // Naive Fibonacci
-int fib(int n)
+/* int fib(int n)
 {
     if (n == 0)
     {
@@ -17,7 +17,7 @@ int fib(int n)
     {
         return fib(n - 1) + fib(n - 2);
     }
-}
+} */
 
 // With caching
 int fib_cache(int n, int *cache)
@@ -33,10 +33,11 @@ int fib_cache(int n, int *cache)
     }
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
 
-    // for (int i = 0; i < 45; i++) {
+    // for (int i = 0; i < 45; i++)
+    // {
     //     printf("%d ", fib(i));
     // }
 
@@ -49,7 +50,7 @@ int main(int argc, char const *argv[])
     cache[0] = 0;
     cache[1] = 1;
 
-    for (int i = 0; i < 45; i++)
+    for (int i = 0; i < 47; i++)
     {
         printf("%d ", fib_cache(i, cache));
     }

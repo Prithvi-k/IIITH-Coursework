@@ -22,10 +22,10 @@ PermList create_perm_list(int k)
 {
     int fk = fact(k);
     // create a PermList, which can hold factorial(k) Perms
-    PermList M = malloc(sizeof(Perm) * fk);
+    PermList M = (int **)malloc(sizeof(Perm) * fk);
     for (int i = 0; i < fk; i++)
     {
-        M[i] = malloc(sizeof(int) * k);
+        M[i] = (int *)malloc(sizeof(int) * k);
     }
     return M;
 }
@@ -108,7 +108,7 @@ PermList perm(int k)
 
 int main()
 {
-    int k = 10;
+    int k = 3;
     PermList M = perm(k);
     int fk = fact(k);
     for (int i = 0; i < fk; i++)

@@ -40,6 +40,51 @@ baa
 #include <stdio.h>
 #include <string.h>
 
+int factorial(int n)
+{
+    if (n == 0 || n == 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return n * factorial(n - 1);
+    }
+}
+
+int number_of_permutations(int n, char arr[n])
+{
+    // Find number of permutations of given string input
+    int total_permutations = factorial(n);
+
+    // Find number of permutations of repeated characters
+    int count = 1, index = 0;
+    char temp[n], element;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (arr[i] != temp[j])
+            {
+                element = arr[i];
+            }
+        }
+
+        for (int k = 0; k < n; k++)
+        {
+            if (element == arr[k])
+            {
+                temp[index] = element;
+                index++;
+                count++;
+            }
+        }
+
+        total_permutations /= factorial(count);
+        count = 1;
+    }
+}
+
 void swap(char *a, char *b)
 {
     char temp = *a;
@@ -52,7 +97,6 @@ void permute(char *a, int l, int r)
     if (l == r)
     {
         printf("%s", a);
-        printf("%c", ' ');
     }
     else
     {
@@ -69,7 +113,12 @@ int main()
 {
     char a[100];
     scanf("%s", a);
-    int n = strlen(a);
-    permute(a, 0, n - 1);
+
+    int n = strlen(a), x = 0;
+    x = number_of_permutations(n, a);
+    printf("%d\n", x);
+
+    // printf("%d\n", n);
+    // permute(n, a, 0, n - 1);
     return 0;
 }

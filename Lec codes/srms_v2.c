@@ -9,6 +9,7 @@ typedef enum PayMode
     Cash,
     Card,
     UPI,
+
 } PayMode;
 
 // Defines a struct to take in customer data
@@ -18,14 +19,7 @@ typedef struct Customer
     int phone_no;   // Phone number is an integer
 } Customer;
 
-typedef struct Item
-{
-    char name[100]; // Item name
-    int price;      // Price of Item
-    int quantity;   // Quantity of Item
-} Item;
-
-typedef struct Receipt
+typedef struct Reciept
 {
     time_t time;
     float value;
@@ -33,14 +27,14 @@ typedef struct Receipt
     PayMode mode;
     int payment_mode;
     int item_count;
-} Receipt;
+} Reciept;
 
 typedef struct Database
 {
     Customer customers[100];
-    Receipt receipts[1000];
+    Reciept reciepts[1000];
     int customer_count;
-    int receipt_count;
+    int reciept_count;
 } Database;
 
 // Find a customer with `phone` as the phone number in database `db`
@@ -59,18 +53,18 @@ Customer *find_customer_by_phone_no(int phone, Database *db)
     return cust;
 }
 
-Customer *add_customer(char *name, int phone_no, Database *db)
+Customer *add_customer(char *name, int phone_no, /* PayMode mode ,*/ Database *db)
 {
-    Customer *c = &(db->customers[db->customer_count++]); // for pointer, we use `->` instead of `.` to access elements
+    Customer *c = &(db->customers[db->customer_count++]);
     c->phone_no = phone_no;
     strcpy(c->name, name);
     return c;
 }
 
-Receipt *add_receipt(int value, int number_of_items, PayMode payment_mode, Customer *c, Database *db)
+Reciept *add_reciept(int value, int number_of_items, PayMode payment_mode, Customer *c, Database *db)
 {
     time_t now = time(NULL);
-    Receipt *r = &(db->receipts[db->receipt_count++]);
+    Reciept *r = &(db->reciepts[db->reciept_count++]);
     r->customer = c;
     r->value = value;
     r->time = now;
@@ -82,13 +76,13 @@ Receipt *add_receipt(int value, int number_of_items, PayMode payment_mode, Custo
 void total_revenue_on_a_particular_day(int day, int month, int year, Database *db)
 {
     int total_revenue = 0, count = 1;
-    for (int i = 0; i < db->receipt_count; i++)
+    for (int i = 0; i < db->reciept_count; i++)
     {
-        struct tm *time = localtime(&db->receipts[i].time);
+        struct tm *time = localtime(&db->reciepts[i].time);
         if (time->tm_mday == day && time->tm_mon == (month - 1) && time->tm_year == (year - 1900))
         {
-            total_revenue += db->receipts[i].value;
-            printf("%d. Customer Name: %s\t Receipt Value: %0.1f\n", count, db->receipts[i].customer->name, db->receipts[i].value);
+            total_revenue += db->reciepts[i].value;
+            printf("%d. Customer Name: %s\t Receipt Value: %0.1f\n", count, db->reciepts[i].customer->name, db->reciepts[i].value);
             count++;
         }
     }
@@ -99,7 +93,7 @@ int main()
 {
 
     Database db;
-    db.customer_count = db.receipt_count = 0;
+    db.customer_count = db.reciept_count = 0;
 
     while (true)
     {
@@ -107,22 +101,22 @@ int main()
         // system("@cls||clear"); // clears the screen
 
         printf("-------------------------------------------------------------------\n"
-               "Store Receipt Management System\n"
+               "Store Reciept Management System\n"
                "-------------------------------------------------------------------\n"
                "\tOptions: 0 New Receipt\n"
                "\t         1 New Customer\n"
                "\t         2 Receipts by Customer\n"
                "\t         3 Total Amount by Customer\n"
-               "\t         4 Total Revenue on a Particular Day\n"
-               "\tStats: %d Customers | %d Receipts\n"
+               "\t         4 Total Revenue on a particular day\n"
+               "\tStats: %d Customers | %d Reciepts\n"
                "-------------------------------------------------------------------\n"
                "Enter Option: ",
-               db.customer_count, db.receipt_count);
+               db.customer_count, db.reciept_count);
 
         int option;
         scanf("%d", &option);
 
-        int phone_number, receipt_value, i, mode, day, month, year;
+        int p, v, i, mode, day, month, year;
         char random;
         Customer *c = NULL;
         char name[100];
@@ -130,92 +124,81 @@ int main()
         {
         case 0:
             printf("Enter Customer Phone: ");
-            scanf("%d", &phone_number);
-            c = find_customer_by_phone_no(phone_number, &db);
+            scanf("%d", &p);
+            c = find_customer_by_phone_no(p, &db);
             if (c == NULL)
             {
                 printf("(New Customer) Name: ");
                 scanf("%s", name);
-                c = add_customer(name, phone_number, &db);
+                c = add_customer(name, p, &db);
             }
-            printf("Receipt Amount: ");
-            scanf("%d", &receipt_value);
+            printf("Reciept Amount: ");
+            scanf("%d", &v);
             printf("Mode of payment: ");
             scanf("%d", &mode);
             printf("Number of Items: ");
             scanf("%d", &i);
-            add_receipt(receipt_value, i, mode, c, &db);
+            add_reciept(v, i, mode, c, &db);
             break;
 
         case 1:
             printf("Enter Customer Phone: ");
-            scanf("%d", &phone_number);
+            scanf("%d", &p);
             if (c == NULL)
             {
                 printf("(New Customer) Name: ");
                 scanf("%s", name);
-                c = add_customer(name, phone_number, &db);
+                c = add_customer(name, p, &db);
             }
             break;
 
         case 2:
             printf("Enter Customer Phone: ");
-            scanf("%d", &phone_number);
-            c = find_customer_by_phone_no(phone_number, &db);
+            scanf("%d", &p);
+            c = find_customer_by_phone_no(p, &db);
             if (c == NULL)
             {
                 printf("Customer not found\n");
             }
-            
             else
             {
-                printf("Receipts for %s\n", c->name);
+                printf("Reciepts for %s\n", c->name);
                 char *modes[] = {"Cash", "Card", "UPI"};
 
-                printf("Serial No. Value\tItems\tMode\tCustomer\n");
-                for (int i = 0; i < db.receipt_count; i++)
+                for (int i = 0; i < db.reciept_count; i++)
                 {
-                    if (db.receipts[i].customer == c)
+                    if (db.reciepts[i].customer == c)
                     {
-                        if (db.receipts[i].payment_mode == 0)
-                        {
-                            printf("\t%d. %0.1f\t%d\t%s\t%s\n", (i + 1), db.receipts[i].value, db.receipts[i].item_count, modes[db.receipts[i].payment_mode], c->name);
-                        }
-                        else if (db.receipts[i].payment_mode == 1)
-                        {
-                            printf("\t%d. %0.1f\t%d\t%s\t%s\n", (i + 1), db.receipts[i].value, db.receipts[i].item_count, modes[db.receipts[i].payment_mode], c->name);
-                        }
-                        else if (db.receipts[i].payment_mode == 2)
-                        {
-                            printf("\t%d. %0.1f\t%d\t%s\t%s\n", (i + 1), db.receipts[i].value, db.receipts[i].item_count, modes[db.receipts[i].payment_mode], c->name);
-                        }
+                        printf("\t%d. %0.1f\t%d\t%s\n", (i + 1), db.reciepts[i].value, db.reciepts[i].item_count, modes[db.reciepts[i].payment_mode]);
                     }
+                    scanf("%c", &random);
+                    break;
                 }
-                scanf("%c", &random);
-                break;
             }
+            break;
         case 3:
             int sum = 0;
 
             printf("Enter Customer Phone: ");
-            scanf("%d", &phone_number);
-            c = find_customer_by_phone_no(phone_number, &db);
+            scanf("%d", &p);
+            c = find_customer_by_phone_no(p, &db);
             if (c == NULL)
             {
                 printf("Customer not found\n");
             }
             else
             {
-                printf("Receipts for %s\n", c->name);
-                for (int i = 0; i < db.receipt_count; i++)
+                printf("Reciepts for %s\n", c->name);
+                for (int i = 0; i < db.reciept_count; i++)
                 {
-                    if (db.receipts[i].customer == c)
+                    if (db.reciepts[i].customer == c)
                     {
-                        sum += db.receipts[i].value;
+                        sum += db.reciepts[i].value;
                     }
                 }
                 printf("Total Amount: %d\n", sum);
             }
+            break;
 
         case 4:
             int sum1 = 0;
