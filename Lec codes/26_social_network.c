@@ -67,6 +67,16 @@ bool check_mutual_friends(char *name1, char *name2, SocialNet *sn)
 
     int flag = 0;
 
+    /*
+    NEED TO IMPLEMENT!!!!
+
+    Code doesn't account for p1 and p2 having the different number of friends.
+    For example, if p1 has 2 friends and p2 has 3 friends, the code will still
+    check for mutual friends between p1 and p2. This is because the code
+    doesn't check for the number of friends of p1 and p2. It only checks if
+    the friends of p1 and p2 are the same.
+     */
+
     for (int i = 0; i < p1->count_friends; i++)
     {
         for (int j = 0; j < p2->count_friends; j++)
