@@ -59,7 +59,7 @@ void print_team(int team[], int members_per_team)
     printf("\n");
 }
 
-void find_all_teams(int n, int players_skill[], int team[], int current_team_members, int members_per_team, int index, int cache[][members_per_team])
+void find_all_teams(int n, int players_skill[], int team[], int current_team_members, int members_per_team, int index)
 {
     if (current_team_members >= members_per_team)
     {
@@ -68,16 +68,10 @@ void find_all_teams(int n, int players_skill[], int team[], int current_team_mem
     }
     else
     {
-        if (cache[index][current_team_members] != -1)
-        {
-            return;
-        }
-
         for (int j = index; j < n; j++)
         {
             team[current_team_members] = players_skill[j];
-            find_all_teams(n, players_skill, team, current_team_members + 1, members_per_team, j + 1, cache);
-            cache[index][current_team_members] = team[current_team_members];
+            find_all_teams(n, players_skill, team, current_team_members + 1, members_per_team, j + 1);
         }
     }
 }
@@ -93,15 +87,8 @@ int main()
         scanf("%d", &A[i]);
     }
 
-    int team[k], cache[n][k];
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < k; j++)
-        {
-            cache[i][j] = -1;
-        }
-    }
+    int team[k];
 
-    find_all_teams(n, A, team, 0, k, 0, cache);
+    find_all_teams(n, A, team, 0, k, 0);
     return 0;
 }

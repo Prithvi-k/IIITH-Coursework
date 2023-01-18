@@ -2,6 +2,60 @@
 #include <string.h>
 #include <stdbool.h>
 
+void copy_array(char *A, int start, int end, char *B)
+{
+    for (int i = start; i < end; i++)
+    {
+        strcpy(&B[i - start], &A[i]);
+    }
+}
+
+void merge(char *L, int length_L, char *R, int length_R, char *A)
+{
+    int l = 0, r = 0, c = 0;
+    while (c <= length_L + length_R - 1)
+    {
+        if (r == length_R)
+        {
+            strcpy(&A[c++], &L[l++]);
+            continue;
+        }
+
+        if (l == length_L)
+        {
+            strcpy(&A[c++], &R[r++]);
+            continue;
+        }
+
+        if (L[l] < R[r])
+        {
+            strcpy(&A[c++], &L[l++]);
+        }
+        else if (L[l] >= R[r])
+        {
+            strcpy(&A[c++], &R[r++]);
+        }
+    }
+}
+
+void merge_sort(char *A, int len)
+{
+    if (len == 1)
+    {
+        return;
+    }
+    else
+    {
+        int mid = len / 2;
+        char L[mid], R[len - mid];
+        copy_array(A, 0, mid, L);
+        copy_array(A, mid, len, R);
+        merge_sort(L, mid);
+        merge_sort(R, len - mid);
+        merge(L, mid, R, len - mid, A);
+    }
+}
+
 void swap(char *a, char *b)
 {
     char temp = *a;
@@ -42,7 +96,6 @@ int count_characters_in_string(int n, char *str, int *count_alphabets)
         int element_ascii = (int)element;
         count_alphabets[(element_ascii - 97)] += 1;
     }
-    return 0;
 }
 
 int count_password_permutations(int n, int *count_alphabets)
@@ -83,23 +136,14 @@ void password_permutations(int n, int *count, char *str, int start, int end, cha
 
 int main()
 {
-    char a[10];
+    char a[10], b[10];
     scanf("%s", a);
+
+    strcpy(b, a);
 
     int password_count = 0, n = strlen(a), count = 0;
     // sort input string a
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = i + 1; j < n; j++)
-        {
-            if (a[i] > a[j])
-            {
-                char temp = a[i];
-                a[i] = a[j];
-                a[j] = temp;
-            }
-        }
-    }
+    merge_sort(b, n);
 
     int count_alphabets[26];
     char strings[factorial(n)][n + 1];
@@ -127,6 +171,11 @@ int main()
     for (int i = 0; i < count; i++)
     {
         printf("%s\n", strings[i]);
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        printf("%s\n", b);
     }
 
     return 0;

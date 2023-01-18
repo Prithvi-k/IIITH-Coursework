@@ -104,6 +104,20 @@ int main()
     scanf("%s", a);
 
     int count = 0, n = strlen(a);
+    // sort input array
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (a[i] > a[j])
+            {
+                char temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+    }
+
     count_password_permutations(a, 0, (n - 1), &count);
     printf("%d\n", count);
     password_permutations(a, 0, (n - 1));
