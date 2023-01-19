@@ -10,7 +10,7 @@ int main()
     char buffer[BUFFER_SIZE];
     int totalRead = 0;
 
-    fPtr = fopen("/home/prithvi/Documents/CPro/Class/text.txt", "r");
+    fPtr = fopen("/home/prithvi/Documents/CPro/Class/file1.txt", "r");
 
     if (fPtr == NULL)
     {

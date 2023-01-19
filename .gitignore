@@ -42,6 +42,9 @@
 *.idb
 *.pdb
 
+#cph files
+*.prob
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd
@@ -60,3 +63,7 @@ Class/14_combinations_recursion
 .vscode/launch.json
 .vscode/c_cpp_properties.json
 .vscode/launch.json
+Class/1_swap
+Class/file1.txt
+Class/file2.txt
+Labs/5_q2

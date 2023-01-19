@@ -14,11 +14,13 @@ int main()
         exit(0);
     }
 
-    int a = 0, b = 0, c = 0;
+    char a[6];
 
-    fscanf(fPtr, "%d, %d, %d", &a, &b, &c);
+    // fscanf(fPtr, "%s", a);
 
-    printf("%d, %d, %d", a, b, c);
+    fgets(fPtr, 6, a);
+
+    printf("%s", a);
 
     return 0;
 }

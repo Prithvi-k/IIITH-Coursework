@@ -9,7 +9,7 @@ int main()
     // Open file in write mode (`w`)
     // If file does not exist, it will be created
     // Specify path of file to be created relative to current directory
-    fPtr = fopen("/home/prithvi/Documents/CPro/Class/file1.txt", "w");
+    fPtr = fopen("/home/prithvi/Documents/CPro/Class/file2.txt", "w");
 
     // fopen() return NULL if last operation was unsuccessful
     if (fPtr == NULL)

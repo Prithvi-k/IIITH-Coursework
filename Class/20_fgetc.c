@@ -8,7 +8,7 @@ int main()
     char ch;
 
     // Open file in read mode
-    fPtr = fopen("/home/prithvi/Documents/CPro/Class/text.txt", "r");
+    fPtr = fopen("/home/prithvi/Documents/CPro/Class/file1.txt", "r");
 
     // fopen() return NULL if last operation was unsuccessful
     if (fPtr == NULL)
