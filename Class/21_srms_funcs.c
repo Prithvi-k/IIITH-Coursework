@@ -4,14 +4,14 @@
 
 #include "21_srms.h"
 
-Customer *find_customer_by_phone_no(int phone, Database *db)
+int find_customer_by_phone_no(int phone, Database *db)
 {
-    Customer *cust = NULL;
+    int cust = -1;
     for (int i = 0; i < db->customer_count; i++)
     {
         if (phone == db->customers[i].phone_no)
         {
-            cust = &(db->customers[i]);
+            cust = db->receipts;
             break;
         }
     }

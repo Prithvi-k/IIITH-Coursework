@@ -55,6 +55,6 @@ int find_customer_by_phone_no(int phone, Database *db);
 
 int add_customer(char *name, int phone_no, Database *db);
 
-Receipt *add_receipt(int value, int number_of_items, PayMode payment_mode, int c, Database *db);
+Receipt *add_receipt(int c, int number_of_items, int value, int payment_mode, Database *db);
 
 void total_revenue_on_a_particular_day(int day, int month, int year, Database *db);
