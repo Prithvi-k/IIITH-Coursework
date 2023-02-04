@@ -15,7 +15,7 @@ int main()
 {
     FILE *fPtr;
     FILE *temp;
-    fPtr = fopen("Assignments/Assignment 4/to_capitalise.txt", "r");
+    fPtr = fopen("to_capitalise.txt", "r");
     if (!fPtr)
     {
         printf("File not found");
@@ -23,7 +23,7 @@ int main()
     }
 
     // create a temporary file
-    temp = fopen("Assignments/Assignment 4/temp.txt", "w");
+    temp = fopen("temp.txt", "w");
 
     if (!temp)
     {
@@ -36,7 +36,7 @@ int main()
     char word[100];
     while ((c = fgetc(fPtr)) != EOF)
     {
-        if (c == ' ' || c == '\n')
+        if (c == ' ' || c == '\n' || c == ',' || c == '.' || c == ';' || c == ':' || c == '-' || c == '!' || c == '?' || c == '&' || c == '(' || c == ')')
         {
             // c is a space or a newline => end of word
             word[i] = '\0';
@@ -48,6 +48,56 @@ int main()
             {
                 printf("%s\n", word);
                 fprintf(temp, "%s\n", word);
+            }
+            else if (c == ',')
+            {
+                printf("%s,", word);
+                fprintf(temp, "%s,", word);
+            }
+            else if (c == '.')
+            {
+                printf("%s.", word);
+                fprintf(temp, "%s.", word);
+            }
+            else if (c == ';')
+            {
+                printf("%s;", word);
+                fprintf(temp, "%s;", word);
+            }
+            else if (c == ':')
+            {
+                printf("%s:", word);
+                fprintf(temp, "%s:", word);
+            }
+            else if (c == '-')
+            {
+                printf("%s-", word);
+                fprintf(temp, "%s-", word);
+            }
+            else if (c == '!')
+            {
+                printf("%s!", word);
+                fprintf(temp, "%s!", word);
+            }
+            else if (c == '?')
+            {
+                printf("%s?", word);
+                fprintf(temp, "%s?", word);
+            }
+            else if (c == '&')
+            {
+                printf("%s&", word);
+                fprintf(temp, "%s&", word);
+            }
+            else if (c == '(')
+            {
+                printf("%s(", word);
+                fprintf(temp, "%s(", word);
+            }
+            else if (c == ')')
+            {
+                printf("%s)", word);
+                fprintf(temp, "%s)", word);
             }
             else
             {
@@ -74,8 +124,8 @@ int main()
     fclose(fPtr);
     fclose(temp);
 
-    fPtr = fopen("Assignments/Assignment 4/to_capitalise.txt", "w");
-    temp = fopen("Assignments/Assignment 4/temp.txt", "r");
+    fPtr = fopen("to_capitalise.txt", "w");
+    temp = fopen("temp.txt", "r");
 
     if (!fPtr || !temp)
     {
@@ -91,22 +141,23 @@ int main()
 
     fclose(fPtr);
     fclose(temp);
-    remove("Assignments/Assignment 4/temp.txt");
+    remove("temp.txt");
 
     // Check
-    fPtr = fopen("Assignments/Assignment 4/to_capitalise.txt", "r");
-    if (!fPtr)
-    {
-        printf("File not found");
-        return 0;
-    }
+    // fPtr = fopen("to_capitalise.txt", "r");
+    // if (!fPtr)
+    // {
+    //     printf("File not found");
+    //     return 0;
+    // }
 
-    printf("\n\n");
-    while ((c = fgetc(fPtr)) != EOF)
-    {
-        printf("%c", c);
-    }
+    // printf("\n\n");
+    // while ((c = fgetc(fPtr)) != EOF)
+    // {
+    //     printf("%c", c);
+    // }
+    // printf("\n");
 
-    fclose(fPtr);
+    // fclose(fPtr);
     return 0;
 }

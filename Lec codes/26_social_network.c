@@ -68,7 +68,7 @@ bool check_mutual_friends(char *name1, char *name2, SocialNet *sn)
     int flag = 0;
 
     /*
-    NEED TO IMPLEMENT!!!!
+    Implemented
 
     Code doesn't account for p1 and p2 having the different number of friends.
     For example, if p1 has 2 friends and p2 has 3 friends, the code will still
@@ -77,18 +77,42 @@ bool check_mutual_friends(char *name1, char *name2, SocialNet *sn)
     the friends of p1 and p2 are the same.
      */
 
-    for (int i = 0; i < p1->count_friends; i++)
+    int count_friends_p1 = p1->count_friends;
+    int count_friends_p2 = p2->count_friends;
+
+    if (count_friends_p1 > count_friends_p2)
     {
-        for (int j = 0; j < p2->count_friends; j++)
+        for (int i = 0; i < count_friends_p2; i++)
         {
-            if (p1->friends[i] == p2->friends[j])
+            for (int j = 0; j < count_friends_p1; j++)
             {
-                flag++;
-                if (flag == 1)
+                if (p1->friends[i] == p2->friends[j])
                 {
-                    printf("%s and %s have mutual friends:\n", name1, name2);
+                    flag++;
+                    if (flag == 1)
+                    {
+                        printf("%s and %s have mutual friends:\n", name1, name2);
+                    }
+                    printf("%d. %s\n", flag, p1->friends[i]->name);
                 }
-                printf("%d. %s\n", flag, p1->friends[i]->name);
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; i < count_friends_p1; i++)
+        {
+            for (int j = 0; j < count_friends_p2; j++)
+            {
+                if (p1->friends[i] == p2->friends[j])
+                {
+                    flag++;
+                    if (flag == 1)
+                    {
+                        printf("%s and %s have mutual friends:\n", name1, name2);
+                    }
+                    printf("%d. %s\n", flag, p1->friends[i]->name);
+                }
             }
         }
     }

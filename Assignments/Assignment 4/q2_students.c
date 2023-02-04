@@ -46,7 +46,7 @@ void print_students_with_age_19(Student students[], int n)
             if (flag == 0)
             {
                 flag++;
-                printf("Students of age 19 are: \n");
+                printf("Student(s) of age 19 is/are: \n");
             }
             count++;
             printf("%d. %s\n", count, students[i].name);
@@ -68,7 +68,7 @@ void print_students_with_email_starting_with_I_or_T(Student students[], int n)
             if (flag == 0)
             {
                 flag++;
-                printf("Students with email starting with I or T are: \n");
+                printf("Student(s) with email starting with I or T is/are: \n");
             }
             count++;
             printf("%d. %s\n", count, students[i].name);
@@ -81,29 +81,24 @@ void print_students_with_email_starting_with_I_or_T(Student students[], int n)
     }
 }
 
-void student_email_available(Student students[], int n)
+void student_email_available(Student students[], int n, char email[MAX_EMAIL_LENGTH])
 {
-    int flag = 0, count = 0;
+    int flag = 0;
     for (int i = 0; i < n; i++)
     {
-        if (strcmp(students[i].email, "-") != 0)
+        if (strcmp(students[i].email, email) == 0)
         {
-            if (flag == 0)
-            {
-                flag++;
-                printf("Students with email are: \n");
-            }
-            count++;
-            printf("%d. Name = %s,\n", count, students[i].name);
-            printf("   Age = %d,\n", students[i].age);
-            printf("   Roll No. = %d,\n", students[i].roll_no);
-            printf("   Email = %s,\n", students[i].email);
-            printf("   Hostel Address = %s\n", students[i].hostel_address);
+            flag++;
+            printf("\nThe student with given email is: \n");
+            printf("Name = %s,\n", students[i].name);
+            printf("Roll No. = %d,\n", students[i].roll_no);
+            printf("Email = %s\n", students[i].email);
+            break;
         }
     }
     if (flag == 0)
     {
-        printf("No students with email are found.\n");
+        printf("No students with givenemail are found.\n");
     }
 }
 
@@ -123,10 +118,11 @@ int main()
         scanf("%d", &age);
         printf("Enter the roll no. of student %d: ", i + 1);
         scanf("%d", &roll_no);
-        printf("Enter the email of student %d: ", i + 1);
+        printf("Enter the email of student %d\n(enter \"-\" if no email is available): ", i + 1);
         scanf("%s", email); // enter "-" if email is not available
         printf("Enter the hostel address of student %d: ", i + 1);
         scanf("%s", hostel_address);
+        printf("\n");
         add_student(students, i, name, age, roll_no, email, hostel_address);
     }
 
@@ -135,7 +131,9 @@ int main()
     printf("\n");
     print_students_with_email_starting_with_I_or_T(students, n);
     printf("\n");
-    student_email_available(students, n);
-
+    printf("Please enter a student email to check if it is available or not:\n");
+    char email[MAX_EMAIL_LENGTH];
+    scanf("%s", email);
+    student_email_available(students, n, email);
     return 0;
 }

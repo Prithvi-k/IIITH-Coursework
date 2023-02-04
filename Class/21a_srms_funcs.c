@@ -2,7 +2,7 @@
 // Needs to be compiled with 21_srms_data_write.c (at the same time)
 // (or any other file that uses these functions)
 
-#include "21_srms.h"
+#include "21a_srms.h"
 
 int find_customer_by_phone_no(int phone, Database *db)
 {
@@ -11,7 +11,7 @@ int find_customer_by_phone_no(int phone, Database *db)
     {
         if (phone == db->customers[i].phone_no)
         {
-            cust = db->receipts;
+            cust = i;
             break;
         }
     }

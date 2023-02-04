@@ -13,7 +13,7 @@ int main()
     add_receipt(200, 1, UPI, a, &db);
     add_receipt(150, 2, Cash, a, &db);
 
-    int b = add_customer("Bob", 2468, &db);
+    int b = add_customer("Tom", 2468, &db);
 
     add_receipt(300, 3, UPI, b, &db);
     add_receipt(230, 5, UPI, b, &db);

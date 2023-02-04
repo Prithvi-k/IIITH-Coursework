@@ -41,7 +41,6 @@ int main()
     sn.members[4].age = 30;
 
     sn.members[0].friends[0] = {0, 1};
-    
 
     return 0;
 }
