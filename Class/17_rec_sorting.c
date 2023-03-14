@@ -14,7 +14,7 @@ int sort(int x, int arr[x])
         if (arr[j] <= min)
         {
             min = arr[j];
-            index = j
+            index = j;
         }
     }
 

@@ -25,7 +25,25 @@ int main()
     printf("Enter the sum required: ");
     scanf("%d", &req_sum);
 
-    int length_of_subarray;
+    int sum = 0, start = 0, end = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        sum += A[i];
+        end = i;
+
+        while (sum > req_sum)
+        {
+            sum -= A[start];
+            start++;
+        }
+
+        if (sum == req_sum)
+        {
+            printf("Subarray found from index %d to %d\n", start, end);
+            return 0;
+        }
+    }
 
     return 0;
 }

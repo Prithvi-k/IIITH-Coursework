@@ -10,14 +10,15 @@ int main()
 
     for (int i = 0; i < 2; i++)
     {
-        // both are same
         printf("i = %d\n", i);
+        // both are same
         printf("arr + i: %p\n", arr + i);
         printf("*(arr + i): %p\n", (*(arr + i)));
 
         for (int j = 0; j < 3; j++)
         {
             printf("j = %d\n", j);
+            // Not same
             printf("(arr + i) + j: %p\n", ((arr + i) + j));
             printf("*(arr + i) + j: %p\n", (*(arr + i) + j));
             printf("Value = %d \n\n", *(*(arr + i) + j));
