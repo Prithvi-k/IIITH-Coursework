@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}" />
+    <title>Form</title>
+  </head>
+  <body>
+    <div class="header">
+      <a class="form-link" href="/">Form Main Page</a>
+      <a class="active user-link" href="/users">All Users</a>
+    </div>
+    <h1>All Users</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr
+          onclick="location.href='/users/{{ user['email'] }}';"
+          style="cursor: pointer">
+          <td>{{ user['name'] }}</td>
+          <td><a class="all-users-email">{{ user['email'] }}</a></td>
+          <td>{{ user['password'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <form action="/delete" method="POST" class="clear-button">
+      <button type="submit">Clear All User Data</button>
+    </form>
+  </body>
+</html>

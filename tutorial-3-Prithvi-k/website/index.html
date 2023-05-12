@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cookies</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="header">
+      <h1>Grandma's Cookie Recipes</h1>
+    </div>
+    <div id="dark-mode-toggle">
+      <label class="switch" for="dark-mode-switch">
+        <input type="checkbox" id="dark-mode-switch" />
+        <span class="slider"></span>
+      </label>
+    </div>
+    <main>
+      <div class="button-container">
+        <button id="hello-world-button">Hello World</button>
+        <button id="bold-button">Bold</button>
+        <button id="unbold-button">Unbold</button>
+      </div>
+
+      <article>
+        <div class="image-container">
+          <img
+            id="cookie-image"
+            src="images/cookie1.jpg"
+            alt="Photo of a delicious cookie" />
+          <button class="next-image-button">Next Image</button>
+        </div>
+
+        <h2>Chocolate Chip Cookies</h2>
+        <p>Ingredients:</p>
+        <ul>
+          <li>2 1/4 cups all-purpose flour</li>
+          <li>1 tsp baking soda</li>
+          <li>1 tsp salt</li>
+          <li>1 cup unsalted butter, at room temperature</li>
+          <li>3/4 cup white granulated sugar</li>
+          <li>3/4 cup brown sugar</li>
+          <li>2 large eggs</li>
+          <li>2 tsp vanilla extract</li>
+          <li>2 cups semisweet chocolate chips</li>
+        </ul>
+        <p>Instructions:</p>
+        <ol>
+          <li>Preheat oven to 375°F (190°C).</li>
+          <li>
+            In a small bowl, combine flour, baking soda, and salt. Set aside.
+          </li>
+          <li>
+            In a large bowl, cream butter and sugars until light and fluffy.
+          </li>
+          <li>Add eggs, one at a time, beating well after each addition.</li>
+          <li>Stir in vanilla extract.</li>
+          <li>Gradually add flour mixture to creamed mixture and mix well.</li>
+          <li>Stir in chocolate chips.</li>
+          <li>Drop by rounded tablespoonfuls onto ungreased baking sheets.</li>
+          <li>Bake for 8-10 minutes or until lightly browned.</li>
+          <li>Cool on wire racks.</li>
+        </ol>
+      </article>
+      <br /><br />
+      <article>
+        <h2>End your meal with a laugh</h2>
+        <p>As Grandma used to say, all good meals should end with a joke!</p>
+        <button id="new-joke">Get a new joke</button>
+        <p id="joke">This is a sample Joke</p>
+      </article>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

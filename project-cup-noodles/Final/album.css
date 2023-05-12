@@ -1,0 +1,215 @@
+/* Variables */
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --green: #1db954;
+  --grey: #4e4e4e;
+  --echo-pink: #aa73e4;
+  --echo-blue: #0698d8;
+  --echo-mid1: #757ee1;
+  --red: #ff0000;
+}
+
+/* Body */
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  height: 100%;
+  margin-bottom: 100px;
+  clear: both;
+}
+
+/* Main heading */
+.album-container {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 50vw 50vw;
+  column-gap: 50px;
+  margin-left: 20vw;
+  margin-right: 2vw;
+  padding-bottom: 100px;
+}
+
+.album-art {
+  width: 350px;
+  justify-self: end;
+}
+
+.image {
+  display: block;
+  width: max-content;
+  margin-right: 0px;
+}
+
+.text {
+  font-size: 50px;
+  justify-self: start;
+}
+
+.album-artist-name-link {
+  text-decoration: none;
+}
+
+.album-artist-name-long {
+  position: relative;
+  top: -5vh;
+  padding-top: 1vh;
+  padding-bottom: 0;
+  font-size: 25px;
+  color: var(--echo-pink);
+}
+
+.album-artist-name-long:hover {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--echo-pink),
+    var(--echo-pink) 80px,
+    var(--echo-blue) 100px,
+    var(--echo-blue) 200px
+  );
+  background-clip: text;
+  color: transparent;
+  transition: all 0.3s ease-in-out;
+  background-position: 100% 100%;
+}
+
+.album-artist-name {
+  position: relative;
+  top: -5vh;
+  padding-top: 1vh;
+  padding-bottom: 0;
+  font-size: 25px;
+  color: var(--echo-pink);
+}
+
+.album-artist-name:hover {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--echo-pink),
+    var(--echo-pink) 30px,
+    var(--echo-blue) 100px,
+    var(--echo-blue) 200px
+  );
+  background-clip: text;
+  color: transparent;
+  transition: all 0.3s ease-in-out;
+  background-position: 100% 100%;
+}
+
+.album-artist-name-short {
+  position: relative;
+  top: -5vh;
+  padding-top: 1vh;
+  padding-bottom: 0;
+  font-size: 25px;
+  color: var(--echo-pink);
+}
+
+.album-artist-name-short:hover {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--echo-pink),
+    var(--echo-pink) 15px,
+    var(--echo-blue) 100px,
+    var(--echo-blue) 200px
+  );
+  background-clip: text;
+  color: transparent;
+  transition: all 0.3s ease-in-out;
+  background-position: 100% 100%;
+}
+
+.album-artist-name-super-short {
+  position: relative;
+  top: -5vh;
+  padding-top: 1vh;
+  padding-bottom: 0;
+  font-size: 25px;
+  color: var(--echo-pink);
+}
+
+.album-artist-name-super-short:hover {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--echo-pink),
+    var(--echo-pink) 10px,
+    var(--echo-blue) 100px,
+    var(--echo-blue) 200px
+  );
+  background-clip: text;
+  color: transparent;
+  transition: all 0.3s ease-in-out;
+  background-position: 100% 100%;
+}
+
+.album-release-year {
+  position: relative;
+  top: -7vh;
+  font-size: 25px;
+  color: #939393;
+}
+
+.album-songs-number {
+  position: relative;
+  top: -10vh;
+  padding-top: 1vh;
+  font-size: 25px;
+  color: #939393;
+}
+
+.song-list-head {
+  margin-left: 250px;
+  padding: 8px 16px;
+  color: var(--white);
+  font-size: 25px;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 16px;
+}
+
+/* Songs List */
+
+.songs-table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-left: 20vw;
+  margin-right: 1vw;
+  text-align: left;
+  width: 80vw;
+  margin-bottom: 3rem;
+}
+
+.song-list-head-text {
+  font-size: 40px;
+  color: var(--white);
+  padding-bottom: 1rem;
+}
+
+.song-title,
+.song-length,
+.play-button,
+.upvote-button {
+  font-size: 20px;
+  padding-top: 1rem;
+  vertical-align: center;
+}
+
+.play-button {
+  fill: var(--white);
+}
+
+.play-button:hover {
+  fill: var(--echo-mid1);
+}
+
+.upvote-button {
+  fill: var(--white);
+  /* fill: rgba(0, 0, 0, 1); */
+}
+
+.upvote-button:hover {
+  fill: var(--red);
+}

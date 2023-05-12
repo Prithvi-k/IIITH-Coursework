@@ -1,0 +1,96 @@
+/* Variables */
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --green: #1db954;
+  --grey: #4e4e4e;
+  --echo-pink: #aa73e4;
+  --echo-blue: #0698d8;
+  --echo-mid1: #757ee1;
+}
+
+/* Body */
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  height: 100%;
+  margin-bottom: 100px;
+  clear: both;
+}
+
+.title-header {
+  /* Make the text have space of 50px to the left from left margin */
+  margin-left: 250px;
+  font-size: 4.5rem;
+  /* display: inline; */
+  padding-bottom: 200px;
+}
+.subtitle-genre {
+  margin-left: 250px;
+  font-size: 2rem;
+  /* display: inline; */
+  padding-bottom: 200px;
+  padding-top: 100px;
+  margin-top: 1rem;
+}
+
+/* Album Art */
+.box-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1rem;
+  justify-items: center;
+  margin-top: 10px;
+  margin-left: 210px;
+  padding-bottom: 50px;
+}
+
+.box-caption {
+  position: absolute;
+  max-width: 200px;
+  word-break: break-word;
+}
+
+.align-center {
+  position: absolute;
+  max-width: 200px;
+  word-break: break-word;
+}
+
+/* Standard: Top Center */
+.box-flex {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 1rem;
+  word-break: break-word;
+  background-color: black;
+  color: #d9d9d9;
+}
+
+.box-caption {
+  display: none;
+}
+
+.box-img {
+  width: 350px;
+}
+
+.box-img:hover {
+  filter: brightness(30%);
+}
+
+/* Box: Center Center */
+.box-flex-center a:hover + .box-caption {
+  display: block;
+  position: absolute;
+  max-width: 200px;
+  word-break: break-word;
+  padding-top: 120px;
+}
