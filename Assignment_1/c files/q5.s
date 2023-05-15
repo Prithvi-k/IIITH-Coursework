@@ -1,4 +1,3 @@
-# ll * get_address_smallest(ll * arr, ll size);
 .global get_address_smallest
 
 get_address_smallest:
