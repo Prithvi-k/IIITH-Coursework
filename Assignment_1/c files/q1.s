@@ -11,6 +11,9 @@ get_sum:
     cmpq $0, %rsi           # Check if input length is 0
     je .L4
     
+    #
+    # Loop through array
+    #
     .L2:
         cmpq $0, %rsi       # Check if number of elements is 0
         jle .L4
@@ -25,8 +28,10 @@ get_sum:
         subq $1, %rsi       # Decrease count by 1
         jmp .L2             # Continue loop
 
-    .L3:
+    #
     # If number id divisible by 3
+    #
+    .L3:
         addq (%rdi), %rcx   # Add value of number to sum
         addq $8, %rdi       # Increment pointer by 8 
         subq $1, %rsi       # Decrease count by 1
