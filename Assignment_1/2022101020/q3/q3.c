@@ -3,6 +3,7 @@
 
 void divide(ll m, ll n, ll* arr);
 
+
 int main()
 {
     ll n, m;

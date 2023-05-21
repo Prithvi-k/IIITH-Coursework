@@ -7,6 +7,8 @@
 #       - i.e is result id negative, we add 1
 #
 
+# Check when negative, when 2^x = a  
+
 calculate:
     # %rdi -> a
     # %rsi -> x
@@ -68,7 +70,7 @@ calculate:
         je .end                 # If y is 0, we return b
         jg .y_pos               # If y is positive, we multiply b by 2^y (left shift by y)
         negq %rcx               # Negate y and right shift b by y (equivalent to division by 2^y)
-        cmpq $0, %rbx           # If y is negative, we divide b by 2^y and take care to round up
+        cmpq $0, %rbx           # If b is negative, we divide b by 2^y and take care to round up
         jl .b_neg_y_neg         # Jump to .b_neg_y_neg  
         jmp .y_neg              # Jump to .y_neg
 

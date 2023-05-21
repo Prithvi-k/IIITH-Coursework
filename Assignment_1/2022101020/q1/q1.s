@@ -8,15 +8,15 @@ get_sum:
     movq $3, %rbx           # Initialise a variable for dividend
     movq $0, %rcx           # Variable to store sum
 
-    cmpq $0, %rsi           # Check if input length is 0
-    je .L4
+    cmpq $0, %rsi           # Compare input length with 0
+    je .L4                  # If equal to 0, jump to .L4
     
     #
     # Loop through array
     #
     .L2:
-        cmpq $0, %rsi       # Check if number of elements is 0
-        jle .L4
+        cmpq $0, %rsi       # Compares number of elements with 0
+        jle .L4             # If not positive, jump to .L4
         movq $0, %rdx       # Variable to store remainder
 
         movq (%rdi), %rax   # Move value at index of array to register

@@ -1,5 +1,3 @@
-# long long int get_product_assembly(node *head);
-
 .global get_product_assembly
 
 get_product_assembly:
@@ -9,8 +7,6 @@ get_product_assembly:
 
         testq %rdi, %rdi                # Check if head is NULL
         je .L2                          # If so, return 1
-
-        movq $9223372036854775807, %r12 # Store LLONG_MAX in %r12
 
     #
     # Main function to calculate product
@@ -24,16 +20,6 @@ get_product_assembly:
 
         cmpq $0, %rax                   # Check if product is 0
         je .L3                          # If so, go to .L3 (skips modulo)
-
-        movq %rax, %rbx                 # Move product into %rbx
-        movq $0, %rax                   # Clear %rax
-
-        # Product modulo LLONG_MAX
-        idivq %r12                      # product /= LLONG_MAX
-        cmpq $0, %rdx                   # Check if remainder is 0
-        je .L4                          # If not, go to .L4
-
-        movq %rbx, %rax                 # Move product into %rax
 
     #
     # Traverse to next node, check if it's NULL
@@ -51,20 +37,8 @@ get_product_assembly:
         jmp .L1                         # Go to .L1
 
     #
-    # Modulo function
-    #
-    .L4:
-        movq %rbx, %rax                 # Move product into %rax
-        idivq %r12                      # product /= LLONG_MAX
-        movq %rdx, %rax                 # Move remainder into %rax
-        jmp .L2                         # Go to .L2
-
-
-    #
     # Return product
     #
     .L3:
         ret
-
-
 
