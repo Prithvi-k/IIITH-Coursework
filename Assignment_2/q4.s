@@ -5,8 +5,8 @@ special_op:
     pushq   %rbp                        # save base pointer
     movq    %rsp, %rbp                  # set base pointer
 
-    movq    -8(%rsp), %r10              # r10 = 7th argument
-    movq    -16(%rsp), %r11             # r11 = 8th argument
+    movq    16(%rbp), %r10              # rax = 7th argument
+    movq    24(%rbp), %r11              # r11 = 8th argument
 
     movq    %rdi, %rax                  # x = 1st argument
 
