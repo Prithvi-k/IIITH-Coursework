@@ -1,77 +1,100 @@
 .global is_balanced
 
 is_balanced:
-        pushq   %rbp
-        movq    %rsp, %rbp     # rbx register stores the value of rsp
+    # %rdi -> array length
+    # %rsi -> array pointer
 
-        # rdi -> n, string length
-        # rsi -> s, string pointer
-        movq    $0, %r8         # r8 -> counter
+    pushq   %rbp
+    movq    %rsp, %rbp
 
-        movq    $0, %rax
+    movq    $0, %r8                     # open parenthesis counter
 
-        sub     $8, %rsp
-        
-        xor     %edx, %edx
+    cmpq    $0, %rdi                    # if array length is 0
+    je      .end
 
-        .L1:
-            cmpq    $0, %rdi
-            jle      .L2
+    .iterate_through_string:
+        cmpq    $0, %rdi                # if array length is 0
+        je      .end
 
-            movb    (%rsi), %dl
+        movq    (%rsi), %rcx             # load current character
+        andq    $0xFF, %rcx              # mask to 8 bits
 
-            cmp     $'{', %dl
-            jz .open_parenthesis
+        cmpq    $'(', %rcx           
+        je      .open_parenthesis
 
-            cmp     $'[', %dl
-            jz .open_parenthesis
+        cmpq    $'[', %rcx
+        je      .open_parenthesis
 
-            cmp     $'(', %dl
-            jz .open_parenthesis
+        cmpq    $'{', %rcx
+        je      .open_parenthesis
 
-            cmp     $'}', %dl
-            jz .closed_parenthesis
+        cmpq    $')', %rcx
+        je      .close_parenthesis
 
-            cmp     $']', %dl
-            jz .closed_parenthesis
+        cmpq    $']', %rcx
+        je      .close_parenthesis_square
 
-            cmp     $')', %dl
-            jz .closed_parenthesis
-            
-            addq    $1, %rsi
-            decq    %rsi
-            jmp     .L1
+        cmpq    $'}', %rcx
+        je      .close_parenthesis_curly
+    
+    .open_parenthesis:
+        pushq   %rcx                    # save current character
+        incq    %r8                     # increment open parenthesis counter
+        incq    %rsi                    # increment array pointer
+        decq    %rdi                    # decrement array length
+        jmp     .iterate_through_string
 
-        .open_parenthesis:
-            pushq   %rdx
-            addq    $1, %rsi
-            decq    %rsi
-            incq    %r8
-            jmp     .L1
-        
-        .closed_parenthesis:
-            cmpq    $0, %r8
-            jle      .L3
-            popq    %rax
-            cmp     %al, %dl
-            jne     .L3
-            addq    $1, %rsi
-            decq    %rsi
-            decq    %r8
-            jmp     .L1
+    .close_parenthesis:
+        cmpq    $0, %r8                 # if open parenthesis counter is 0
+        je      .end
+        popq    %rdx                    # load character from stack
+        cmpq    $'(', %rdx              # if character is not open parenthesis
+        jne     .end
+        decq    %r8                     # decrement open parenthesis counter
+        incq    %rsi                    # increment array pointer
+        decq    %rdi                    # decrement array length
+        jmp     .iterate_through_string
+
+    .close_parenthesis_square:
+        cmpq    $0, %r8                 # if open parenthesis counter is 0
+        je      .end
+        popq    %rdx                    # load character from stack
+        cmpq    $'[', %rdx              # if character is not open parenthesis
+        jne     .end
+        decq    %r8                     # decrement open parenthesis counter
+        incq    %rsi                    # increment array pointer
+        decq    %rdi                    # decrement array length
+        jmp     .iterate_through_string
+
+    .close_parenthesis_curly:
+        cmpq    $0, %r8                 # if open parenthesis counter is 0
+        je      .end
+        popq    %rdx                    # load character from stack
+        cmpq    $'{', %rdx              # if character is not open parenthesis
+        jne     .end
+        decq    %r8                     # decrement open parenthesis counter
+        incq    %rsi                    # increment array pointer
+        decq    %rdi                    # decrement array length
+        jmp     .iterate_through_string
+    
+    .end:
+        cmpq    $0, %r8                 # if open parenthesis counter is 0
+        je      .balanced
+        movq    $0, %rax                # return 0
+        movq    %rbp, %rsp              # restore stack pointer 
+        popq    %rbp                    # restore base pointer
+        ret
+    
+    .balanced:
+        movq    $1, %rax                # return 1
+        movq    %rbp, %rsp              # restore stack pointer 
+        popq    %rbp                    # restore base pointer
+        ret
 
 
-        .L2:
-            cmpq    $0, %r8
-            jne     .L3
-            movq $1, %rax
-            movq %rbp, %rsp
-            popq %rbp
-            ret 
 
-        .L3:
-            movq $0, %rax
-            movq %rbp, %rsp
-            popq %rbp
-            ret        
+
+
+
+
 
