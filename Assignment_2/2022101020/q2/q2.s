@@ -10,10 +10,6 @@ binarySearch:
     pushq   %rbp                        # save base pointer
     movq    %rsp, %rbp                  # set base pointer
 
-    # Not needed since we need to save %rcx and %r10 across calls
-    # pushq   %r10
-    # pushq   %rcx
-
     cmpq    %rsi, %rdx                  # if left > right
     jl      .not_found                  # return -1
     je      .single_element             # if left == right, check if target
@@ -34,11 +30,11 @@ binarySearch:
     shrq    $1, %r10                    # r10 = (left + right) / 2 i.e. mid
 
     .L1:
-        movq    (%rdi, %r10, 8), %r8        # r8 = array[mid]
+        movq    (%rdi, %r10, 8), %r8    # r8 = array[mid]
         cmpq    %r8, %rcx                   
-        je      .found                      # if array[mid] == target, return mid
-        jl      .lesser                     # if array[mid] > target, search left
-        jg      .greater                    # if array[mid] < target, search right
+        je      .found                  # if array[mid] == target, return mid
+        jl      .lesser                 # if array[mid] > target, search left
+        jg      .greater                # if array[mid] < target, search right
 
     # this helper function does a binary search on the left half of the array
     .lesser:
@@ -91,14 +87,7 @@ binarySearch:
         jmp     .end
     
     .end:
-        # removed since we need to save %rcx and %r10 across calls
-        # popq    %rcx
-        # popq    %r10
-
-        # Function conclude
+        # function conclude
         movq    %rbp, %rsp              # restore stack pointer 
         popq    %rbp                    # restore base pointer
-
         ret
-
-

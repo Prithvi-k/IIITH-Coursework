@@ -5,7 +5,7 @@ findNearest:
     # rsi -> answer array
     # rdx -> array length
 
-    # Function prelude
+    # function prelude
     pushq   %rbp                        # save base pointer
     movq    %rsp, %rbp                  # set base pointer
 
@@ -42,7 +42,6 @@ findNearest:
         incq    %rax                    # increment index
         jmp     .iterate_through_array  # continue loop
 
-
     .end:
         cmpq    $0, %rcx                # if number of indices in stack == 0
         jg      .stack_not_empty    
@@ -52,12 +51,12 @@ findNearest:
         cmpq    $0, %rcx                # if number of indices in stack == 0
         jle     .end_function
         popq    %r9                     # get top of stack
-        movq    $-1, (%rsi, %r9, 8)    # push current value to answer array
+        movq    $-1, (%rsi, %r9, 8)     # push current value to answer array
         decq    %rcx                    # decrement number of indices in stack
         jmp     .stack_not_empty        # continue loop
 
     .end_function:
+        # function conclude
         movq    %rbp, %rsp              # restore stack pointer
         popq    %rbp                    # restore base pointer
         ret                             # return
-
