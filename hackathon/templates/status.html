@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Orders</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <header>
+      <img
+        src="{{ url_for('static', filename='iiith_logo.png') }}"
+        alt="IIIT Eats Logo"
+        id="logo-image" />
+      <div id="logo-text"><a href="/" class="no-decoration">IIITEats</a></div>
+    </header>
+    <h1 id="order-status-heading">Orders</h1>
+    <table id="order-table">
+      <thead>
+        <tr>
+          <th>Order Number</th>
+          <th>Name</th>
+          <th>Hostel</th>
+          <th>Room</th>
+          <th>Phone</th>
+          <th>Canteen</th>
+          <th>Items</th>
+          <th>Total Price</th>
+          <th>Tip</th>
+          <th>Order Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>{{ order['order_number'] }}</td>
+          <td>{{ order['name'] }}</td>
+          <td>{{ order['hostel'] }}</td>
+          <td>{{ order['room'] }}</td>
+          <td>{{ order['phone'] }}</td>
+          <td>{{ order['canteen'] }}</td>
+          <td>{{ order['order'] }}</td>
+          <td>{{ order['price'] }}</td>
+          <td>{{ order['tip'] }}</td>
+          <td class="order-status">
+            <a onclick="statusDelivered('{{ order['order_number'] }}')">
+              {{ order['order_status'] }}
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div>
+      <footer>
+        <div>
+          <a href="../src/about.html">Copyright</a>
+          <a href="../src/about.html">Terms & Conditions</a>
+          <a href="../src/about.html">FAQ's</a>
+          <a href="../src/about.html">About</a>
+        </div>
+      </footer>
+    </div>
+    <script>
+      function statusDelivered(orderNumber) {
+        const order_number = orderNumber;
+        var response = prompt(
+          "Confirm: Have you received your order? (Y/N)",
+          ""
+        );
+        console.log("Onclick: ", order_number, response);
+        fetch(`/received_delivery`, {
+          method: "POST",
+          body: JSON.stringify({
+            order_number: order_number,
+            response: response,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data["status"]);
+            location.reload();
+          })
+          .catch((error) => console.log(error));
+      }
+    </script>
+  </body>
+</html>

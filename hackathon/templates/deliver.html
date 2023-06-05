@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IIITH EATS</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='deliver.css') }}" />
+  </head>
+
+  <body>
+    <header>
+      <img
+        src="{{ url_for('static', filename='iiith_logo.png') }}"
+        alt="IIIT Eats Logo"
+        id="logo-image" />
+      <div id="logo-text"><a href="/" class="no-decoration">IIITEats</a></div>
+    </header>
+
+    <div class="orders">
+      <h1 id="order-status-heading">Current Orders</h1>
+    </div>
+
+    <div class="blank"></div>
+
+    <footer>
+      <div>
+        <a href="../src/about.html">Copyright</a>
+        <a href="../src/about.html">Terms & Conditions</a>
+        <a href="../src/about.html">FAQ's</a>
+        <a href="../src/about.html">About</a>
+      </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='deliver.js') }}"></script>
+    <!-- <script>
+      function statusChange(
+        name,
+        number,
+        hostel,
+        room_number,
+        price
+      ) {
+        var user_name = name;
+        var user_number = number;
+        var user_hostel = hostel;
+        var user_roomNumber = room_number;
+        var user_price = price;
+        console.log(user_name)
+        console.log(user_number)
+
+        var deliverer_name = prompt("Please enter your name", "");
+        var deliverer_number = prompt("Please enter your number", "");
+
+        console.log(
+          "Onclick: ",
+          user_name,
+          deliverer_name,
+          deliverer_number,
+          user_price
+        );
+
+        fetch("/accepted_delivery", {
+          method: "POST",
+          body: JSON.stringify({
+            name: user_name,
+            number: user_number,
+            hostel: user_hostel,
+            room_number: user_roomNumber,
+            deliverer_name: deliverer_name,
+            deliverer_number: deliverer_number,
+            price: price,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data["status"]);
+            location.reload();
+          })
+          .catch((error) => console.log(error));
+      }
+    </script> -->
+    <script>
+      function statusChange(orderNumber) {
+        const order_number = orderNumber;
+        var delivery_partner_name = prompt("Enter Delivery Partner Name");
+        var delivery_partner_phone = prompt("Enter Delivery Partner Phone");
+        console.log(
+          "Onclick: ",
+          order_number,
+          delivery_partner_name,
+          delivery_partner_phone
+        );
+        fetch(`/accept_delivery`, {
+          method: "POST",
+          body: JSON.stringify({
+            order_number: order_number,
+            delivery_partner_name: delivery_partner_name,
+            delivery_partner_phone: delivery_partner_phone,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data["status"]);
+            location.reload();
+          })
+          .catch((error) => console.log(error));
+      }
+    </script>
+  </body>
+</html>
