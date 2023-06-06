@@ -1,80 +1,90 @@
 .global compute_result
 
 compute_result:
-    # %rdi -> number of elements
+    # %rdi -> size of array
     # %rsi -> size of sliding window
-    # %rdx -> pointer to array
+    # %rdx -> array
 
-    movq    $0, %rax
+    movq    $0, %r8                     # %r8 -> i
+    movq    $0, %r9                     # %r9 -> arr[i]
 
-    cmpq    $0, %rdi
-    je      .end
+    movq    $0, %r10                    # current window sum
+    movq    $0, %r11                    # max window sum
 
-    cmpq    $0, %rsi
-    je      .end
+    cmpq    $0, %rdi                    # if size of array == 0
+    je      .end                        # jump to end
 
-    movq    $0, %r8         # %r8 -> current element
-    movq    $0, %r9         # %r9 -> index of current element
+    cmpq    $0, %rsi                    # if size of window == 0
+    je      .end                        # jump to end
 
-    cmpq    %rdi, %rsi
-    jge      .alt_elems
+    cmpq    %rdi, %rsi                  # if size of window > size of array
+    jg      .smaller_than_window        # jump to end
+    jmp     .initial_window             # jump to initial window
 
-    movq    $0, %r10        # %r10 -> store max value
-    movq    %rdi, %r11
-    subq    %rsi, %r11
-    movq    $0, %r12        # %r12 -> store prev value
+    .smaller_than_window:
+        cmpq    %r8, %rdi               # i < size
+        jle     .end                    # if not, jump to end
+
+        movq    (%rdx, %r8, 8), %r9     # arr[i]
+        addq    %r9, %r11               # current window sum += arr[i]
+        incq    %r8                     # i++
+        jmp     .smaller_than_window         # jump to initial window
 
     .initial_window:
-        cmpq    %rsi, %r9
-        jge     .loop_driver
-        movq    (%rdx, %r9, 8), %r8
-        addq    %r8, %r10
-        incq    %r9
-        jmp     .initial_window
+        cmpq    %rsi, %r8               # i < window size
+        jge     .window_loop            # if not, jump to window loop
 
-    .loop_driver:
-        movq    %r10, %r12
-        movq    %rsi, %r13    # %r13 -> index of elem to be removed
-        decq    %r13
-        cmpq    %rsi, %r11
-        jle     .small_array
-        jmp     .larger_array
+        movq    (%rdx, %r8, 8), %r9     # arr[i]
+        addq    %r9, %r10               # current window sum += arr[i]
+        incq    %r8                     # i++
+        jmp     .initial_window         # jump to initial window
 
-    .small_array:
-        movq    %rdi, %r9
-        subq    %r11, %r9
-        jmp     .main_loop
+    .window_loop:
+        cmpq    %rdi, %rsi
+        je      .array_same_size_as_window
 
-    .larger_array:
-        movq    %rdi, %r9
-        subq    %rsi, %r9
+        movq    %r10, %r11              # max window sum = current window sum
 
-        .main_loop:
-            cmpq    %r9, %rdi
-            jle     .loop_end
-            subq    (%rdx, %r13, 8), %r12
-            addq    (%rdx, %r9, 8), %r12
-            decq    %r13
-            incq    %r9
-            cmpq    %r12, %r10
-            jle     .new_value_greater
-            jmp     .main_loop
+        movq    %rdi, %r12              # %r12 -> j : tracks element to be added
+        decq    %r12                    # j--
+        decq    %r8                     # i-- : Now tracks element to be removed
 
-        .new_value_greater:
-            movq    %r12, %r10
-            jmp     .main_loop
-        
-        .loop_end:
-            movq    %r10, %rax
-            ret
+    .compute_remaining_windows:
+        cmpq    $0, %r8                 # if i == 0
+        jl      .end                    # jump to end
 
-    .alt_elems:
-        movq (%rdx, %r9, 8), %r8
-        addq %r8, %rax
-        incq %r9
-        cmpq %r9, %rdi
-        jle .end
-        jmp .alt_elems
+        movq    (%rdx, %r8, 8), %r9     # arr[i]
+        subq    %r9, %r10               # current window sum -= arr[i]
+        movq    (%rdx, %r12, 8), %r9    # arr[j]
+        addq    %r9, %r10               # current window sum += arr[j]
+
+        cmpq    %r10, %r11              # if current window sum > max window sum
+        jge     .next_iteration         # jump to next iteration
+
+        movq    %r10, %r11              # max window sum = current window sum
+
+    .next_iteration:
+        decq    %r12                    # j--
+        decq    %r8                     # i--
+        jmp     .compute_remaining_windows
+
+
+    .array_same_size_as_window:
+        movq    %r10, %r11              # max window sum = current window sum
+        jmp     .end
 
     .end:
+        movq    %r11, %rax              # return max window sum
         ret
+
+
+
+
+
+
+
+
+
+
+
+
