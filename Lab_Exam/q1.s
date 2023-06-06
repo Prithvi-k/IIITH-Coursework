@@ -3,19 +3,34 @@
 min_bacteria:
     # %rdi -> number of bacteria
 
-    movq %rdi, %rax
-    movq $2, %rbx
+    movq    $0, %rax        # count
+    movq    $2, %rcx        # current power of 2
+    movq    $2, %rdx        # previous power of 2
 
-    cqto
-    idivq %rbx
-    movq $1, %rax
-    cmpq $0, %rdx
-    je even_bacteria
-    jmp odd_bacteria
+    .main_loop:
+        cmpq    $0, %rdi
+        je      .end
 
-    even_bacteria:
-        ret
+        cmpq    $1, %rdi
+        je      .single_bacteria
 
-    odd_bacteria:
-        addq $1, %rax
+        cmpq    %rcx, %rdi
+        jl      .add_new_bacteria
+
+        movq    %rcx, %rdx
+        shlq    %rcx
+        jmp     .main_loop
+
+    .add_new_bacteria:
+        subq    %rdx, %rdi
+        incq    %rax
+        movq    $2, %rcx
+        movq    $2, %rdx
+        jmp     .main_loop
+
+    .single_bacteria:
+        incq    %rax
+        jmp     .end
+
+    .end:
         ret

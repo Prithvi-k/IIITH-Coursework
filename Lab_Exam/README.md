@@ -4,7 +4,7 @@ A set of questions to practise for the Computer Systems Organisation Course Lab 
 
 ## Questions Completed
 
-- [ ] q1 - Minimum Bacteria
+- [X] q1 - Minimum Bacteria
 - [X] q2 - Fizz Buzz
 - [X] q3 - Palindromic Number
 - [X] q4 - Euclidean GCD
