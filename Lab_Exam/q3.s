@@ -103,16 +103,3 @@ is_palindrome:
         movq    %rbp, %rsp
         popq    %rbp
         ret
-
-    
-
-
-
-
-
-
-
-
-
-
-
