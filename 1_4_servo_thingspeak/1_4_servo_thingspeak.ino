@@ -10,7 +10,7 @@ Servo myservo;
 const char* ssid = "Prithvi";
 const char* pass = "password123";
 
-const char* server = "mqtt3.thingspeak.com";
+// const char* Server = "mqtt3.thingspeak.com";
 
 const char* mqttUserName = "LiQQLg44CwkCKQAxGhwuLxU";
 const char* clientID="LiQQLg44CwkCKQAxGhwuLxU";
@@ -38,8 +38,7 @@ String SendHTML(void){
   ptr +="</head>\n";
   ptr +="<body>\n";
   ptr +="<h1>ESP32 with ThingSpeak Server</h1>\n";
-  ptr +="<h3>Using Station(STA) Mode</h3>\n";
-  ptr +="<h4>Control the LED</h4>\n";
+  ptr +="<h4>Control the Servo</h4>\n";
   ptr +="<a class=\"button button-on\" href=\"https://api.thingspeak.com/update?api_key=DLTEL3804UG6PSF6&field1=90\">ON</a>\n";
   ptr +="<a class=\"button button-off\"href=\"https://api.thingspeak.com/update?api_key=DLTEL3804UG6PSF6&field1=0\">OFF</a>\n";
   ptr +="</body>\n";
@@ -49,12 +48,12 @@ String SendHTML(void){
 
 void serv_f() {
   server.send(200, "text/html", SendHTML());
-}
+} 
 
 void setup() {
   Serial.begin(115200);
 
-  WiFi.begin(ssid, password);
+  WiFi.begin(ssid, pass);
   while(WiFi.status() != WL_CONNECTED){
     Serial.println("loading...");
     delay(1000);
@@ -71,7 +70,7 @@ void setup() {
 void loop() {
   server.handleClient();
   // Serial.println("Connected to mqtt");
-  int input_value = ThingSpeak.readFloatField(writeChannelID, 1, "ZG36TWT6F15DHSA6");
+  int input_value = ThingSpeak.readFloatField(writeChannelID, 1, "TD3OC5AM62OEPRTG");
   Serial.println(input_value);
 
   if(input_value == 90)
