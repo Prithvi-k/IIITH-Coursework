@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <title>IIITEats</title>
+  </head>
+  <body>
+    <header>
+      <img
+        src="{{ url_for('static', filename='iiith_logo.png') }}"
+        alt="IIIT Eats Logo"
+        id="logo-image" />
+      <div id="logo-text"><a href="/" class="no-decoration">IIITEats</a></div>
+    </header>
+
+    <div id="buttons">
+      <a href="/order"><button class="landing-page-buttons">Order</button></a>
+      <a href="/deliver"
+        ><button class="landing-page-buttons">Deliver</button></a
+      >
+      <a href="/order_lookup"
+        ><button class="landing-page-buttons">Status</button></a
+      >
+    </div>
+    <div id="scroll-arrow">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-arrow-narrow-down"
+        width="44"
+        height="44"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="#fff"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <line x1="12" y1="5" x2="12" y2="19" />
+        <line x1="16" y1="15" x2="12" y2="19" />
+        <line x1="8" y1="15" x2="12" y2="19" />
+      </svg>
+    </div>
+
+    <div class="blank-space"></div>
+
+    <div id="landing-page-text">
+      <p>
+        IIIT Eats is a food delivery service for the IIIT Hyderabad campus. It
+        is a platform for students to order food from the comfort of their
+        rooms, and for students to earn some extra cash.
+      </p>
+    </div>
+
+    <div>
+      <footer>
+        <div>
+          <a href="../src/about.html">Copyright</a>
+          <a href="../src/about.html">Terms & Conditions</a>
+          <a href="../src/about.html">FAQ's</a>
+          <a href="../src/about.html">About</a>
+        </div>
+      </footer>
+    </div>
+    <script>
+      const arrow = document.querySelector("#scroll-arrow");
+
+      arrow.addEventListener("click", () => {
+        const page = document.querySelector("#landing-page-text");
+        page.scrollIntoView({ behavior: "smooth" });
+      });
+    </script>
+  </body>
+</html>

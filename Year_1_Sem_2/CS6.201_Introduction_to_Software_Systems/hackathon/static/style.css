@@ -1,0 +1,355 @@
+/* variables for colour */
+:root {
+  --main: #0077b6; /* main blue colour */
+  --main-hover: #023e8a; /* dark blue colour on hover */
+  --main-text: #fff; /* white text */
+  --alert: #dc3545; /* red alert colour */
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: linear-gradient(to bottom right, #1f2937, #000000);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  background-color: var(--main);
+  color: var(--main-text);
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: left;
+  gap: 3vw;
+  align-items: center;
+  z-index: 5;
+  max-height: 10vh;
+}
+
+header img {
+  max-height: 10vh;
+}
+
+#logo-text {
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.no-decoration {
+  text-decoration: none;
+  color: var(--main-text);
+}
+
+/* Home Page */
+#landing-page-text {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 8rem 0;
+  text-align: center;
+}
+
+#landing-page-text p {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  margin-top: 2rem;
+  color: var(--main-text);
+}
+
+#buttons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-page-buttons {
+  background-color: var(--main);
+  width: 20vw;
+  height: 20vh;
+  color: var(--main-text);
+  border: none;
+  padding: 5vh 5vw;
+  border-radius: 15px;
+  margin: 0 1vw;
+  font-size: 35px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.landing-page-buttons:hover {
+  color: var(--main-hover);
+  background-color: #00ffff;
+  box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff,
+    0 0 20px #00ffff, 0 0 35px #00ffff, 0 0 40px #00ffff, 0 0 50px #00ffff;
+}
+
+#scroll-arrow {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-color: transparent;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease-in-out;
+}
+
+#scroll-arrow i {
+  font-size: 24px;
+  color: #555;
+}
+
+#scroll-arrow:hover {
+  transform: translate(-50%, -5px);
+  animation: bounce 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+  from {
+    transform: translate(-50%, 0);
+  }
+  to {
+    transform: translate(-50%, 5px);
+  }
+}
+
+.blank-space {
+  height: 150vh;
+}
+
+/* Order Form */
+form {
+  margin: auto auto;
+  width: 50%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+label {
+  display: inline-block;
+  width: 150px;
+  margin-right: 10px;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 35vw;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="submit"] {
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+label[for^="quantity_"] {
+  text-align: center;
+  width: 5vw;
+}
+
+#input-for-order {
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+#for-total-price {
+  margin-top: 10px;
+}
+
+#total_price {
+  /* Center it */
+  display: inline;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#for-total-price,
+input[type="submit"] {
+  text-align: center;
+}
+
+#for-total-price label,
+#total_price {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#for-total-price label {
+  margin-right: 10px;
+}
+
+#order-submit-button {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+#order-submit-button input {
+  padding: 10px;
+  background-color: var(--main);
+  color: var(--main-text);
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#order-submit-button input:hover {
+  background-color: var(--main-hover);
+}
+
+/* Lookup Page */
+#lookup-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#lookup-form label {
+  flex: 1;
+  text-align: left;
+  margin-right: 10px;
+}
+
+#phone_number {
+  flex: 3;
+  margin-right: 10px;
+}
+
+#submit-buttom-lookup {
+  flex: 1;
+  margin-right: 10px;
+  background-color: var(--main);
+  color: var(--main-text);
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#submit-buttom-lookup:hover {
+  background-color: var(--main-hover);
+}
+
+/* Order Status Page */
+
+#order-status-heading {
+  text-align: center;
+  margin-top: 25vh;
+  font-size: 50px;
+  padding: 0;
+  color: var(--main);
+}
+
+#order-table {
+  width: 80vw;
+  margin: 0 auto;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+#order-table th {
+  background-color: var(--main);
+  color: var(--main-text);
+  font-weight: 700;
+  padding: 12px;
+  text-align: center;
+  border: 2px solid var(--main);
+}
+
+#order-table td {
+  border: 1px solid var(--main);
+  text-align: center;
+  padding: 10px;
+  color: black;
+}
+
+#order-table tr:nth-child(odd) {
+  background-color: #a0a0a0;
+}
+
+#order-table tr:nth-child(even) {
+  background-color: #ddd;
+}
+
+#order-table tr:hover {
+  background-color: #fff;
+}
+
+.confirm-delivery {
+  cursor: pointer;
+}
+
+.no-orders-display {
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  margin: 20px;
+  color: var(--alert);
+}
+
+/* Footer */
+
+footer {
+  left: 0;
+  bottom: 0;
+  max-width: 100vw;
+  text-align: center;
+  justify-content: space-around;
+  background-color: transparent;
+  display: flex;
+  position: relative;
+}
+
+footer div {
+  padding: 0.781vw;
+  display: flex;
+}
+
+footer div a {
+  width: auto;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  text-decoration: none;
+  font-size: 1rem;
+  color: var(--main);
+}
+
+footer div a:hover {
+  text-decoration: underline;
+}

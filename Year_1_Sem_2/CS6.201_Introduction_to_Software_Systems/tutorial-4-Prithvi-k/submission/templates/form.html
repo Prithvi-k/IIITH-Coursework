@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}" />
+    <title>Form</title>
+  </head>
+  <body>
+    <div class="header">
+      <a class="active form-link" href="/">Form Main Page</a>
+      <a class="user-link" href="/users">All Users</a>
+    </div>
+    <div class="form-container">
+      <form id="Form" method="POST" action="/register">
+        <label>Name:</label>
+        <input type="text" name="name" /><br />
+        <label>Email:</label>
+        <input type="email" name="email" /><br />
+        <label>Password:</label>
+        <input type="password" name="password" /><br />
+        <input type="submit" />
+      </form>
+    </div>
+    <!-- Script to prevent empty field input -->
+    <script>
+      const form = document.querySelector("#Form");
+      form.addEventListener("submit", function (event) {
+        const name = form.elements.name.value.trim();
+        const email = form.elements.email.value.trim();
+        const password = form.elements.password.value.trim();
+        if (name === "" || email === "" || password === "") {
+          alert("Please fill in all fields.");
+          event.preventDefault();
+        }
+      });
+    </script>
+  </body>
+</html>

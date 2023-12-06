@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Order Form</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <header>
+      <img
+        src="{{ url_for('static', filename='iiith_logo.png') }}"
+        alt="IIIT Eats Logo"
+        id="logo-image" />
+      <div id="logo-text"><a href="/" class="no-decoration">IIITEats</a></div>
+    </header>
+    <h1 id="order-status-heading">Order Form</h1>
+    <form method="POST" action="/place_order">
+      <label>Name:</label>
+      <input type="text" name="name" /><br /><br />
+      <label>Hostel Name:</label>
+      <input type="text" name="hostel" /><br /><br />
+      <label>Room Number:</label>
+      <input type="text" name="room" /><br /><br />
+      <label>Ph. Number:</label>
+      <input type="text" name="Phone" /><br /><br />
+      <label>Canteen:</label>
+      <input type="text" name="canteen" /><br /><br />
+
+      <label>Items:</label><br />
+      <div id="input-for-order">
+        <input
+          type="checkbox"
+          name="items"
+          value="1005"
+          onclick="updateTotalPrice()" />
+        <label for="quantity_1005">Pizza</label>
+        <input
+          type="number"
+          id="quantity_1005"
+          name="quantity_1005"
+          min="1"
+          max="10"
+          value="0"
+          onchange="updateTotalPrice()" /><br />
+      </div>
+      <div id="input-for-order">
+        <input
+          type="checkbox"
+          name="items"
+          value="2003"
+          onclick="updateTotalPrice()" />
+        <label for="quantity_2003">Burger</label>
+        <input
+          type="number"
+          id="quantity_2003"
+          name="quantity_2003"
+          min="0"
+          max="10"
+          value="0"
+          onchange="updateTotalPrice()" /><br />
+      </div>
+      <div id="input-for-order">
+        <input
+          type="checkbox"
+          name="items"
+          value="3002"
+          onclick="updateTotalPrice()" />
+        <label for="quantity_3002">Fries</label>
+        <input
+          type="number"
+          id="quantity_3002"
+          name="quantity_3002"
+          min="0"
+          max="10"
+          value="0"
+          onchange="updateTotalPrice()" /><br />
+        <label>Tip:</label>
+        <input type="number" name="tip" min="0" max="1000" value="0" onchange="updateTotalPrice()" /><br /><br />
+      </div>
+
+      <div id="for-total-price">
+        <label>Total Price:</label>
+        <p id="total_price">0</p>
+        <input
+          type="hidden"
+          name="total_price"
+          id="total_price_input"
+          value="0" />
+      </div>
+
+      <br /><br />
+      <div id="order-submit-button">
+        <input type="submit" value="Submit Order" />
+      </div>
+    </form>
+    <div>
+      <footer>
+        <div>
+          <a href="../src/about.html">Copyright</a>
+          <a href="../src/about.html">Terms & Conditions</a>
+          <a href="../src/about.html">FAQ's</a>
+          <a href="../src/about.html">About</a>
+        </div>
+      </footer>
+    </div>
+    <script>
+      function updateTotalPrice() {
+        var totalPrice = 0;
+        var checkboxes = document.getElementsByName("items");
+        for (var i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i].checked) {
+            var itemPrice = parseFloat(checkboxes[i].value) % 1000;
+            var itemQuantity = parseInt(
+              document.getElementById("quantity_" + checkboxes[i].value).value
+            );
+            totalPrice += itemPrice * itemQuantity;
+          }
+        }
+        var tip = parseFloat(document.getElementsByName("tip")[0].value);
+        totalPrice += tip;
+        document.getElementById("total_price").innerHTML =
+          totalPrice.toFixed(2);
+        document.getElementById("total_price_input").value =
+          totalPrice.toFixed(2);
+      }
+    </script>
+  </body>
+</html>

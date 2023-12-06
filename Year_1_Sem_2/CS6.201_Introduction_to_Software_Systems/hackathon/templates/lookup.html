@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Order Lookup</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}" />
+    <style>
+      label {
+        display: inline-block;
+        width: 120px;
+        text-align: right;
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      input[type="checkbox"] {
+        display: inline-block;
+        width: 200px;
+        margin-bottom: 10px;
+      }
+
+      input[type="checkbox"] {
+        width: auto;
+        margin-right: 5px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 8px;
+        color: rgb(59, 197, 70);
+        background-color: floralwhite;
+      }
+
+      tr:nth-child(even) {
+        background-color: rgb(59, 197, 70);
+        color: floralwhite;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img
+        src="{{ url_for('static', filename='iiith_logo.png') }}"
+        alt="IIIT Eats Logo"
+        id="logo-image" />
+      <div id="logo-text"><a href="/" class="no-decoration">IIITEats</a></div>
+    </header>
+    <h1 id="order-status-heading">Order Lookup</h1>
+
+    <form method="post" id="lookup-form">
+      <label for="phone_number" class="label-phone">Phone Number:</label>
+      <input
+        type="text"
+        id="phone_number"
+        name="phone_number"
+        class="input-phone"
+        required />
+      <input type="submit" id="submit-buttom-lookup" value="Lookup" class="btn-lookup" />
+    </form>
+    <div>
+      <footer>
+        <div>
+          <a href="../src/about.html">Copyright</a>
+          <a href="../src/about.html">Terms & Conditions</a>
+          <a href="../src/about.html">FAQ's</a>
+          <a href="../src/about.html">About</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

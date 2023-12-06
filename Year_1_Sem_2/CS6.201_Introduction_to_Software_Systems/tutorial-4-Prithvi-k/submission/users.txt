@@ -1,0 +1,5 @@
+{"name": "John Doe", "email": "email@domain.com", "password": "password"}
+{"name": "Jim Stone", "email": "email@xyz.com", "password": "passWord"}
+{"name": "Lara Croft", "email": "abc@xyz.com", "password": "PassWord"}
+{"name": "Perry", "email": "abc@zyx.com", "password": "abc@123"}
+{"name": "test_user", "email": "testemail@example.com", "password": "qwertyuiop"}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Details</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="header">
+      <a class="form-link" href="/">Form Main Page</a>
+      <a class="active user-link" href="/users">All Users</a>
+    </div>
+
+    <div class="container">
+      {% if user_data %}
+      <h1>User Details</h1>
+      <ul>
+        <li>Name: {{ user_data['name'] }}</li>
+        <li>Email: {{ user_data['email'] }}</li>
+        <li>Password: {{ user_data['password'] }}</li>
+      </ul>
+      {% else %}
+      <h1>User not found!</h1>
+      {% endif %}
+    </div>
+  </body>
+</html>
