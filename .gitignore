@@ -1,1 +1,70 @@
-a.out
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+#cph files
+*.prob
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+Class/1_increment
+.gitignore
+Class/14_factorial_recursion
+Class/14_fibonacci_recursion
+Class/16_file
+Class/15_euclids_gcd
+Class/14_combinations_recursion
+.vscode/launch.json
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+Class/1_swap
+Class/file1.txt
+Class/file2.txt
+Labs/5_q2
+.vscode/

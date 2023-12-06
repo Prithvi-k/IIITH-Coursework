@@ -1,0 +1,2 @@
+1. Seperate .h and .c files
+2. Customer pointer made to customer index (for file handling purposes)
