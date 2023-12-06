@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Current Readings</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="../static/panelState.css" />
+  <link rel="stylesheet" href="../static/rotation.css" />
+</head>
+  <style>
+    body{
+        margin:0px 0px;
+        padding:0px 0px;
+        background-color: #414f55;
+        background-image: url(../static/solarBack.jpg);
+        backdrop-filter: brightness(50%) blur(5px);
+        background-size: cover;
+    }
+    .content{
+        display:flex;
+    }
+    #chart_container{
+        display:flex;
+        flex-direction: column;
+        margin:auto;
+        height:1000px;
+        width:90%;
+    }
+    #chart_container img{
+        height:1000px;
+        width:1300px;
+        margin:auto;
+    }
+     
+    #chart{
+        margin:0px 70px;
+        max-width: 90%;
+        height:700px;
+    }
+    .navbar {
+      width: 200px;
+      height:100vh;
+      background-color: black;
+    }
+    
+    /* Navbar links */
+    .navbar a {
+      display: block;
+      padding: 12px;
+      text-decoration: none;
+      color: #abc2c3;
+    }
+    /* Navbar links on hover */
+    .navbar a:hover {
+       background-color:#294a69;
+       border-radius: 5px;
+    }
+    #stop{
+      display:flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #stop .button{
+      margin:10px;
+      padding:8px 16px;
+      border-radius: 4px;
+      background-color: skyblue;
+      box-shadow: 1px 1px 10px rgba(72, 68, 68, 0.897);
+      cursor:pointer;
+    }
+    #stop .button:hover{
+      filter: brightness(80%);
+      box-shadow: 1px 1px 10px black;
+    }
+  </style>
+<body>
+<div class="content">
+    <div class="navbar">
+      <a href="/">Home</a>
+      <a href="/Currentdata">Current Readings</a>
+      <a href="/Voltagedata">Voltage Readings</a>
+      <a href="/pastdata">Past Data</a>
+      <a href="/panelState">Panel</a>
+    </div>
+    <div id="chart_container">
+        <h1 style="margin:auto">Pressure</h1>
+        <img src="data:image/png;base64,{{ plot_url }}" alt="Graph">
+    </div> 
+    <!-- <div id="stop">
+        <button class="button">STOP</button>
+    </div>
+    <canvas id="chart"></canvas> -->
+   
+</div>
+</body>
+</html>

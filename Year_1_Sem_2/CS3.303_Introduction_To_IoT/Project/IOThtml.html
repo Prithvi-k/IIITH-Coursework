@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <style>
+        .container{
+            background-color:#f3f4f7;
+            width: 50%;
+            margin: auto;
+        }
+    </style>
+    <title>Custom grph</title>
+</head>
+<body>
+    <h1>
+        Thingspeak graph
+    </h1>
+    <div class="container">
+        <canvas id="myChart">
+
+        </canvas>
+    </div>
+    <script>
+        $(document).ready(function() {
+            function getData() {
+                // var url ="https://api.thingspeak.com/channels/2102687/fields/1,2.json?api_key=VZGGAKIKIMMX8L6S&results=5";
+                   var url ="https://api.thingspeak.com/channels/2163205/fields/1,2.json?api_key=B8D0XWNFHM7DULX&results=8"
+                $.getJSON(url, function(data) {
+                    var field1Values = [];
+                    var field2Values = [];
+                    var timestamps = [];
+
+                    $.each(data.feeds, function(index, feed) {
+						field1Values.push(feed.field1);
+						field2Values.push(feed.field2);
+						timestamps.push(feed.created_at);
+					});
+                    //dealing the the graph
+                    var ctx = document.getElementById('myChart').getContext('2d');
+
+                    var chart = new Chart(ctx, {
+                        type:'line',
+                        data:{
+                            labels:timestamps,
+                            datasets:[{
+                                label: 'topl',
+                                data:field1Values,
+                                borderColor: 'black',
+                                backgroundColor: '#84bd00',
+                                borderWidth: 1,
+                                fill: 'false'
+
+                            },
+                            {
+                                label: 'topr',
+                                data:field2Values,
+                                borderColor: 'green',
+                                backgroundColor: '#00205b',
+                                borderWidth: 1,
+                                fill: 'false'
+                            }]
+                        },
+                        options: {
+                            legend: {display: false},
+                            scales: {
+                                yAxes: [{
+                                    thicks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+
+
+
+
+                });
+
+            }
+            getData();
+
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+// PINS USED
+// bmp -> 22(SCL), 21(SDA)
+// voltage -> 4
+// servo -> 14, 18
+// ldr -> 32, 33, 34, 35
+
+#include <Wire.h>
+#include <SPI.h>
+#include <Adafruit_BMP280.h>
+#include "Adafruit_Sensor.h"
+#include <Servo.h>
+#include "WiFi.h"
+#include "ThingSpeak.h"
+#include <HTTPClient.h>
+
+# define I2C_SDA 21
+# define I2C_SCL 22
+// TwoWire I2CBMP = TwoWire(0);
+
+// Adafruit_BMP280 bmp(&I2CBMP);
+
+int master_count = 0;
+// Adafruit_BMP280 bmp; // use I2C interface
+int count = 0;
+float sum_t = 0, sum_p = 0, sum_a = 0, mean_t = 0, mean_p = 0, mean_a = 0;
+const int voltage_analog_channel_pin= 4;
+int ADC_VALUE = 0;
+// int voltage_value = 0;
+// #define Channel_ID 2163205
+// #define Channel_API_Key "3NFJ999UA29ABUYQ"
+// char* SSID="Galaxy S20 FE 5G C177";
+// char* pass="bsdk1925";
+// WiFiClient client;
+//defining Servos
+Servo servohori;
+int servoh = 90;
+int servohLimitHigh = 150;
+int servohLimitLow = 20;
+
+Servo servoverti; 
+int servov = 90; 
+int servovLimitHigh = 150;
+int servovLimitLow = 200;
+//Assigning LDRs
+int ldrtopl = 34; //top left LDR green
+int ldrtopr = 32; //top right LDR yellow
+int ldrbotl = 35; // bottom left LDR blue
+int ldrbotr = 33; // bottom right LDR orange
+int ameya;
+int tanay;
+void setup() {
+  // put your setup code here, to run once:
+  
+// I2CBMP.begin(I2C_SDA, I2C_SCL, 100000);
+ Serial.begin(9600);
+//   while ( !Serial ) delay(100);    
+//   unsigned status;
+// //   status = bmp.begin(BMP280_ADDRESS_ALT, BMP280_CHIPID);
+//   bmp.begin(0x76);
+// //  Serial.begin(9600);
+//   Serial.println("Connecting to WiFi...");
+//   WiFi.begin(SSID,pass);
+//   delay(2000);
+//   if(WiFi.status()==WL_CONNECTED){
+//     Serial.println("WiFi connected successfully!");
+//   }
+//   Serial.println("Local IP: ");
+//   Serial.print(WiFi.localIP());
+//   ThingSpeak.begin(client);
+  pinMode(ldrtopl, INPUT);
+  pinMode(ldrtopr, INPUT);
+  pinMode(ldrbotl, INPUT);
+  pinMode(ldrbotr, INPUT);
+  servohori.attach(14);
+  servohori.write(90);
+  servoverti.attach(18);
+  servoverti.write(40);
+  delay(500);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  count++;
+  master_count++;
+
+  // if(master_count == 10)
+  // {
+
+  //   float temp = bmp.readTemperature();
+  //   sum_t = sum_t + temp;
+  //   mean_t = sum_t/count;
+  //   Serial.print("Temperature: ");
+  //   // Serial.print(temp);
+  //   Serial.print(mean_t);
+  //   Serial.println("");
+  //   // Serial.print("\t");
+    
+  //   float pressure = bmp.readPressure();
+  //   Serial.print("Pressure: ");
+  //   // Serial.print(pressure/100);
+  //   sum_p = sum_p + pressure;
+  //   mean_p = sum_p/count;
+  //   Serial.print(mean_p/100);
+  //   Serial.println("");
+  //   // Serial.print("\t");
+
+  //   float altitude = bmp.readAltitude();
+  //   Serial.print("Altitude: ");
+  //   // Serial.print(altitude);
+  //   sum_a = sum_a + altitude;
+  //   mean_a = sum_a/count;
+  //   Serial.println(mean_a);
+  //   Serial.println("");
+
+  //   ADC_VALUE = analogRead(voltage_analog_channel_pin);
+  //   float v=(ADC_VALUE)*(ADC_VALUE*-9.66631*1e-7+0.0054736);
+  //   Serial.print("Voltage: ");
+  //   Serial.println(v);
+
+  //   // float current=ADC_VALUE-2930;
+  //   // current=current*5/4905
+  // // ThingSpeak.setField(2,mean_t);
+  // // ThingSpeak.setField(3,mean_p);
+  // // ThingSpeak.setField(4,mean_a);
+  // // Serial.print(mean_t);
+  // // Serial.print(" ");
+  // // Serial.print(mean_p);
+  // // Serial.print(" ");
+  // // Serial.print(mean_a);
+  // // Serial.println();
+  //   master_count = 0;
+  // }
+
+  servoh = servohori.read();
+  servov = servoverti.read();
+  //capturing analog values of each LDR
+  int topl = analogRead(ldrtopl);
+  int topr = analogRead(ldrtopr);
+  int botl = analogRead(ldrbotl);
+  int botr = analogRead(ldrbotr);
+  // Serial.print(topl, DEC);
+  Serial.print("LDR Output: ");
+  Serial.print(topl, DEC);
+  Serial.print(" ");
+  Serial.print(topr, DEC);
+  Serial.print(" ");
+  Serial.print(botl, DEC);
+  Serial.print(" ");
+  Serial.print(botr, DEC);
+  Serial.print(" \n");
+
+  // calculating average
+  int avgtop = (topl + topr) / 2; //average of top LDRs
+  int avgbot = (botl + botr) / 2; //average of bottom LDRs
+  int avgleft = (topl + botl) / 2; //average of left LDRs
+  int avgright = (topr + botr) / 2; //average of right LDRs
+
+  // servoverti.write(-90);
+  // servoverti.write(90);
+  if(servoh<0)
+  {
+    servoh=0;
+  }
+  if (servoh>180)
+  {
+    servoh=180;
+  }
+ if (avgtop < avgbot)
+  {
+    servohori.write(servoh +1);
+    delay(30);
+  }
+  else if (avgbot < avgtop)
+  {
+    servohori.write(servoh -1);
+    delay(30);
+  }
+//   else 
+//   {
+//     servoverti.write(servov);
+//   }
+  Serial.println(avgleft);
+  Serial.println(avgright);
+  Serial.println(servov);
+    if (servov > 80)
+    {
+      servov = 80;
+    }
+    if (servov < 0)
+    {
+      servov = 0;
+    }
+  if (avgleft > avgright)
+  {
+    servoverti.write(servov - 1);
+    // servov=servov+1;
+    if (servov < 0)
+    {
+      servov = 0;
+    }
+    delay(30);
+  }
+  else if (avgright > avgleft)
+  {
+    servoverti.write(servov + 1);
+    // servov=servov-1;
+    // Serial.println("Hi");
+    if (servov > 80)
+    {
+      servov = 80;
+    }
+    delay(30);
+  }
+//   else 
+//   {
+//     servohori.write(servoh);
+//   }
+//     Serial.println(servov);
+//   Serial.print(" ");
+//   Serial.println(avgtop);
+//   Serial.print(" ");
+//   Serial.println(avgbot);
+//   Serial.print(" ");
+//   Serial.println(topr);
+//   Serial.print(" ");
+//   Serial.println(botr);
+//   Serial.println("");
+//   Serial.println("");
+
+  // delay(50);
+  // // Serial.println(servov);
+  // ThingSpeak.setField(2,topl);
+  // ThingSpeak.setField(3,topr);
+  // ThingSpeak.setField(4,botl);
+  // ThingSpeak.setField(5,servov);
+  // ThingSpeak.setField(6,servoh);
+  // Serial.println(topl);
+  // Serial.println(servov-90);
+  // Serial.println(servoh-90);
+  // ThingSpeak.writeFields(Channel_ID,Channel_API_Key);
+}

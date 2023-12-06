@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--=============== REMIXICONS ===============-->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="panelState.css">
+        <link rel="stylesheet" href="rotation.css">
+    </head>
+    <style>
+         body{
+            background-color: #414f55;
+         }
+         .content{
+            display:flex;
+         }
+         .infobox{
+            display:flex;
+
+         }
+         .navbar {
+            width: 200px;
+            height:100vh;
+            background-color: #3884ca;
+            }
+            
+            /* Navbar links */
+            .navbar a {
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+            color: #000;
+        }
+        .navbar a:hover {
+            background-color: #7da5ca;
+        }
+        .contentbox{
+            width:80%;
+        }
+        .infobox{
+            width:100%;
+            display:flex;
+        }
+        .infobox .classknob{
+            margin:0px 200px;
+        }
+        .batterybox{
+            display:flex;
+            margin:50px 100px;
+            align-items: center;
+            justify-content: center;
+        }
+        .databox{
+           display:flex;
+           border-radius: 25px;
+           background-color: black;
+           padding:30px;
+           margin:30px 100px;
+        }
+        .databox .data{
+           border-radius: 10px;
+           margin:35px;
+           font-size:18px;
+           padding:18px;
+           background-color: rgba(128, 128, 128, 0.518);
+           padding:15px;
+        }
+        .data p{
+           font-size:24px;
+           font-weight: bolder;
+        }
+    </style>
+    <body>
+    <div class="content">
+        <div class="navbar">
+            <a href="home.html">Home</a>
+            <a href="#about">About</a>
+            <a href="Voltagedata.html" onclick="fetchData()">Voltage Readings</a>
+            <a href="Currentdata.html" onclick="fetchData()">Current Readings</a>
+            <a href="pastdata.html"  onclick="fetchPastData()">Past Data</a>
+            <a href="panelState.html">Panel</a>
+         </div>
+        <!--=============== BATTERY ===============-->
+     <div class="contentbox">
+        <div class="batterybox">
+          <div class="battery">
+            <div class="battery__card">
+                <div class="battery__data">
+                    <p class="battery__text">Battery</p>
+                    <h1 class="battery__percentage">
+                       0%
+                    </h1>
+
+                    <p class="battery__status">
+                        Low battery <i class="ri-plug-line"></i>
+                    </p>
+                </div>
+
+                <div class="battery__pill">
+                    <div class="battery__level">
+                        <div class="battery__liquid"></div>
+                    </div>
+                </div>
+            </div>
+         </div>
+        <div class="databox">
+             <div class="tempHum">
+                <div  class="data">Temperature <p id="temp">35 &deg;C</p></div>
+                <div  class="data">Humidity <p id="hum">234</p></div>
+             </div>
+              <div class="pressAlt">
+                 <div  class="data">Pressure <p id="pres">3439</p></div>
+                 <div  class="data">Altitude <p id="alt">3463</p></div>
+              </div>
+        </div>
+        </div>
+    <div class="infobox">
+        <div class="classknob">
+         <div id="knob-container1">
+            <div id="knob-pointer-path1">
+              <div id="knob-pointer1"></div>
+            </div>
+            <div id="knob-base1">
+              <div id="knob1"></div>
+            </div>
+            <div id="label-container1">
+              <div class="label left-label">-90°</div>
+              <div class="label top-label">0°</div>
+              <div class="label right-label">90°</div>
+            </div>
+          </div>
+          <p id="value-box1">0 &deg;</p>
+        </div>
+        <div class="classknob">
+         <div id="knob-container2">
+            <div id="knob-pointer-path2">
+              <div id="knob-pointer2"></div>
+            </div>
+            <div id="knob-base2">
+              <div id="knob2"></div>
+            </div>
+            <div id="label-container2">
+              <div class="label left-label">-90°</div>
+              <div class="label top-label">0°</div>
+              <div class="label right-label">90°</div>
+            </div>
+          </div>
+          <p id="value-box2">0 &deg;</p>
+        </div>
+        </div>
+    </div>
+ </div>
+        <!--=============== MAIN JS ===============-->
+    </body>
+    <script>
+        initBattery()
+
+function initBattery(){
+    const batteryLiquid = document.querySelector('.battery__liquid'),
+          batteryStatus = document.querySelector('.battery__status'),
+          batteryPercentage = document.querySelector('.battery__percentage')
+    
+    navigator.getBattery().then((batt) =>{
+        updateBattery = () =>{
+            /* 1. We update the number level of the battery */
+            // let level = Math.floor(batt.level * 100)
+            
+            charging = false;
+            level = 35;
+            batteryPercentage.innerHTML = level+ '%'
+
+            /* 2. We update the background level of the battery */
+            batteryLiquid.style.height = `${parseInt(level)}%`
+
+            /* 3. We validate full battery, low battery and if it is charging or not */
+            if(level == 100){ /* We validate if the battery is full */
+                batteryStatus.innerHTML = `Full battery <i class="ri-battery-2-fill green-color"></i>`
+                batteryLiquid.style.height = '103%' /* To hide the ellipse */
+            }
+            else if(level <= 20 &! charging){ /* We validate if the battery is low */
+                batteryStatus.innerHTML = `Low battery <i class="ri-plug-line animated-red"></i>`
+            }
+            else if(charging){ /* We validate if the battery is charging */
+                batteryStatus.innerHTML = `Charging... <i class="ri-flashlight-line animated-green"></i>`
+            }
+            else{ /* If it's not loading, don't show anything. */
+                batteryStatus.innerHTML = ''
+            }
+            
+            /* 4. We change the colors of the battery and remove the other colors */
+            if(level <=20){
+                batteryLiquid.classList.add('gradient-color-red')
+                batteryLiquid.classList.remove('gradient-color-orange','gradient-color-yellow','gradient-color-green')
+            }
+            else if(level <= 40){
+                batteryLiquid.classList.add('gradient-color-orange')
+                batteryLiquid.classList.remove('gradient-color-red','gradient-color-yellow','gradient-color-green')
+            }
+            else if(level <= 80){
+                batteryLiquid.classList.add('gradient-color-yellow')
+                batteryLiquid.classList.remove('gradient-color-red','gradient-color-orange','gradient-color-green')
+            }
+            else{
+                batteryLiquid.classList.add('gradient-color-green')
+                batteryLiquid.classList.remove('gradient-color-red','gradient-color-orange','gradient-color-yellow')
+            }
+        }
+        updateBattery()
+
+        /* 5. Battery status events */
+        batt.addEventListener('chargingchange', () => {updateBattery()})
+        batt.addEventListener('levelchange', () => {updateBattery()})
+       })
+     }
+
+    const knob_pointer1 = document.getElementById('knob-pointer1');
+    const knob_base1 = document.getElementById('knob-base1');
+    const knob1 = document.getElementById('knob1');
+    const value_box1 = document.getElementById('value-box1');
+
+    const knob_pointer2 = document.getElementById('knob-pointer2');
+    const knob_base2 = document.getElementById('knob-base2');
+    const knob2 = document.getElementById('knob2');
+    const value_box2 = document.getElementById('value-box2');
+
+    const min = 0;
+    const max = 100;
+    const full_action_angle = 270;
+    const start_angle = -135;
+
+    knob1.addEventListener('click', (e) => {
+      knob1.classList.toggle('on');
+      knob_base1.classList.toggle('on');
+      knob_pointer1.classList.toggle('on');
+      value_box1.classList.toggle('on');
+      value = 25;
+      let new_pos = value;
+      knob_pointer1.style.transform = `rotateZ(${new_pos}deg)`;
+      value_box1.textContent = value + '°';
+    });
+    knob2.addEventListener('click', (e) => {
+      knob2.classList.toggle('on');
+      knob_base2.classList.toggle('on');
+      knob_pointer2.classList.toggle('on');
+      value_box2.classList.toggle('on');
+      value = 25;
+      let new_pos = value;
+      knob_pointer2.style.transform = `rotateZ(${new_pos}deg)`;
+      value_box2.textContent = value + '°';
+    });
+    </script>
+</html>

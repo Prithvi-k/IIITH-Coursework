@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="../static/panelState.css" />
+  <link rel="stylesheet" href="../static/rotation.css" />
+</head>
+  <style>
+    body{
+        margin:0px 0px;
+        padding:0px 0px;
+        background-color: #414f55;
+        background-image: url(../static/solarBack.jpg);
+        backdrop-filter: brightness(50%) blur(5px);
+        background-size: cover;
+    }
+    .content{
+        display:flex;
+    }
+    #chart_container{  
+        display:flex;
+        flex-direction: column;
+        margin:auto;
+        height:1000px;
+        width:100%;
+    }
+    #start-input,#end-input,#fetch-button{
+        width:20%;
+        margin:10px 55px;
+        height:25px;
+        padding:5px 15px;
+        border-radius: 5px;
+    }
+    #fetch-button{
+        height:35px;
+        font-size: 17px;
+    }
+    #chart{
+        margin:0px 70px;
+        max-width: 90%;
+        height:700px;
+        background-color: antiquewhite;
+    }
+    .navbar {
+      width: 200px;
+      height:100vh;
+      background-color: black;
+    }
+    
+    /* Navbar links */
+    .navbar a {
+      display: block;
+      padding: 12px;
+      text-decoration: none;
+      color: #abc2c3;
+    }
+    #chart-search{
+      display:flex;
+      width:80%;
+      margin:10px auto;
+    }
+    /* Navbar links on hover */
+    .navbar a:hover {
+       background-color:#294a69;
+       border-radius: 5px;
+    }
+    .content img{
+       width:1000px;
+    }
+    #overview{
+       display:flex;
+       position:absolute;
+       bottom:150px;
+       left:400px;
+    }
+    .obox{
+       height: 500px;
+       width:500px;
+       margin:0px 100px;
+    }
+    .obox p{
+       margin:auto;
+       margin-top:20px;
+       text-align: center;
+       font-size:60px;
+       text-shadow: 2px 2px 20px black;
+       color:rgb(245, 243, 243);
+    }
+    .circle{
+       background-color: #010c15;
+       border-top:5px solid orange;
+       border-right:5px solid pink;
+       box-shadow: 2px 2px 20px black;
+       font-size: 80px;
+       height: 400px;
+       width:400px;
+       display:flex;
+       align-items: center;
+       justify-content: center;
+       border-radius: 200px;
+       margin:auto;
+    }
+    .circle p{
+       margin:0px 0px;
+       margin-left:10px;
+       font-weight: normal;
+       font-size: 25px;
+       color:grey;
+    }
+    /* #overview{
+       /* width:1000px;
+       height:1000px;
+       background-color: aqua; */
+    
+  </style>
+<body>
+<div class="content">
+    <div class="navbar">
+      <a href="/">Home</a>
+      <a href="/Currentdata">Current Readings</a>
+      <a href="/Voltagedata">Voltage Readings</a>
+      <a href="/pastdata">Past Data</a>
+      <a href="/panelState">Panel</a>
+    </div>
+
+    <div id="overview">
+         <div class="obox">
+          <div class="circle">1.23e-1<br>
+            <p>KWH</p>
+          </div>
+          <p>Total Generation</p>
+         </div>
+         <div class="obox">
+          <div class="circle">2.12e-3 <br>
+            <p>KWH</p>
+          </div>
+          <p>Today</p>
+         </div>
+    </div>
+</div>
+  <script>
+    fetchkwh();
+    let tg = document.getElementsByClassName('circle');
+
+    setInterval(fetchkwh(),1000);
+    function fetchkwh() {
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "https://api.thingspeak.com/channels/2163205/fields/4,5.json?api_key=B8D0XWNFHM7DULX0");// Fetch data between start and end time
+    xhr.onreadystatechange = function(){
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        jsonData = JSON.parse(xhr.responseText);
+        console.log(jsonData);
+        let powerValues=[];
+        let timestamps=[];
+        let tmp,tmp2;
+        
+        jsonData.feeds.forEach(function(feed) {
+          tmp = feed.field4;
+          tmp2 = feed.field5;
+          if (tmp !== null && tmp2 != null) {
+            powerValues.push((parseFloat(tmp)*parseFloat(tmp2)).toFixed(6));
+          } else {
+            powerValues.push(0);
+          }
+          timestamps.push(feed.created_at);
+        });
+        console.log(powerValues);
+        let totalEnergy = 0;
+        for (let i = 0; i < powerValues.length - 1; i++) {
+        const power = powerValues[i];
+        const startTime = new Date(timestamps[i]).getTime(); // Convert the start time to milliseconds
+        const endTime = new Date(timestamps[i + 1]).getTime(); // Convert the end time to milliseconds
+        const timeInterval = (endTime - startTime) / 1000; // Convert milliseconds to seconds
+
+        const energy = power * timeInterval; // Energy generated during the interval (in joules or watt-seconds)
+        totalEnergy += energy;
+        }
+        
+        const totalEnergyInKWh = totalEnergy / 3600000; // Convert energy from watt-seconds to kilowatt-hours
+        const number = totalEnergyInKWh.toFixed(7);
+        const formattedNumber = convertToOrderOfMagnitude(number);
+        console.log(formattedNumber);
+        // tg[0].textContent = formattedNumber;
+        // tg[1].textContent = formattedNumber;
+
+      }
+    }
+    xhr.send();
+  }
+
+  function convertToOrderOfMagnitude(number) {
+  const absNumber = Math.abs(number);
+  const orderOfMagnitude = Math.floor(Math.log10(absNumber));
+  const magnitude = Math.pow(10, orderOfMagnitude);
+
+  const formattedNumber = (number / magnitude).toFixed(2);
+
+  return formattedNumber + 'e' + orderOfMagnitude;
+  }
+
+  </script>
+</body>
+</html>

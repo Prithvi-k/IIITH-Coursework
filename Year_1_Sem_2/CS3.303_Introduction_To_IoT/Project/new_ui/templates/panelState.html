@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+        <link rel="stylesheet" href="../static/panelState.css" />
+        <link rel="stylesheet" href="../static/rotation.css" />
+        <title>Panel</title>
+    </head>
+    <style>
+         body{
+            background-color: #414f55;
+            background-image: url(../static/solarBack.jpg);
+            backdrop-filter: brightness(50%) blur(5px);
+            background-size: cover;
+         }
+         .content{
+            display:flex;
+         }
+         .infobox{
+            display:flex;
+
+         }
+        .navbar {
+        width: 200px;
+        height:100vh;
+        position: sticky; /* Make it stick, even on scroll */
+        background-color: black;
+        }
+        
+        /* Navbar links */
+        .navbar a {
+        display: block;
+        padding: 12px;
+        text-decoration: none;
+        color: #abc2c3;
+        }
+        /* Navbar links on hover */
+        .navbar a:hover {
+        background-color:#294a69;
+        border-radius: 5px;
+        }
+        /* .contentbox{
+            width:65%;
+        } */
+        .infobox{
+            /* width:100%; */
+            display:flex;
+            padding:20px 0px;
+            padding-top:50px;
+            margin:50px 100px;
+            border-radius: 35px;
+            background-color: rgb(114 123 125 / 49%);
+            box-shadow: 3px 3px 14px rgba(0, 0, 0, 0.488);
+        }
+        .infobox .classknob{
+            margin:0px 110px;
+        }
+        .batterybox{
+            background-color: rgb(114 123 125 / 49%);
+            box-shadow: 3px 3px 14px rgba(0, 0, 0, 0.488);
+            border-radius: 35px;
+            display:flex;
+            margin:50px 100px;
+            align-items: center;
+            justify-content: center;
+        }
+        .battery{
+            margin:30px 70px;
+        }
+        .databox{
+           display:flex;
+           border-radius: 35px;
+           background-color: black;
+           padding:30px;
+           margin:30px 70px;
+        }
+        .box2{
+            display:flex;
+            flex-direction: column;
+        }
+        .box2 a{
+            text-decoration: none;
+        }
+        .databox .data{
+           border-radius: 10px;
+           margin:22px;
+           font-size:18px;
+           width:180px;
+           padding:18px;
+           color:white;
+           background-color: rgba(128, 128, 128, 0.518);
+           padding:15px;
+        }
+        .data p{
+           font-size:31px;
+           font-weight: bolder;
+        }
+        .knob-title{
+            transform: translateY(-220px);
+            font-size: 25px;
+            color:black;
+        }
+        .blink {
+            animation: blink-animation 2s infinite ease;
+        }
+
+        @keyframes blink-animation {
+            0% { background-color: rgb(110, 54, 54); }
+            50% { background-color: rgb(110, 81, 81); }
+            100% { background-color: rgba(128, 128, 128, 0.518); }
+        }
+        #sidebox{
+            background-color:rgba(0, 0, 0, 0.496);
+            display:flex;
+            flex-direction: column;
+            margin:auto 0px;
+            height:90vh;
+            border-radius: 20px;
+            box-shadow: 3px 3px 14px rgba(0, 0, 0, 0.488);
+        }
+        #sidebox .subbox{
+            height:200px;
+            color:black;
+            margin:65px 50px;
+        }
+        .subbox img{
+            height:180px;
+            width:180px;
+            border-radius: 15px;;
+            background-color:grey;
+        }
+        #home img{
+            background-color: rgb(136 215 88);
+        }
+        #hosp img{
+            background-color: rgb(136 215 88);
+        }
+    </style>
+    <body>
+    <div class="content">
+        <div class="navbar">
+            <a href="/">Home</a>
+            <a href="/Currentdata" onclick="fetchData()">Current Readings</a>
+            <a href="/Voltagedata"  onclick="fetchData()">Voltage Readings</a>
+            <a href="/pastdata"  onclick="fetchPastData()">Past Data</a>
+            <a href="/panelState">Panel</a>
+         </div>
+        <!--=============== BATTERY ===============-->
+     <div class="contentbox">
+        <div class="batterybox">
+          <div class="battery">
+            <div class="battery__card">
+                <div class="battery__data">
+                    <p class="battery__text">Battery</p>
+                    <h1 class="battery__percentage">
+                       0%
+                    </h1>
+
+                    <p class="battery__status">
+                        Low battery <i class="ri-plug-line"></i>
+                    </p>
+                </div>
+
+                <div class="battery__pill">
+                    <div class="battery__level">
+                        <div class="battery__liquid"></div>
+                    </div>
+                </div>
+            </div>
+         </div>
+        <div class="databox">
+             <div class="box2">
+                <a href="{{ url_for('temp_data') }}">
+                     <div  class="data">Temperature <p id="temp">--</p></div>
+                </a>
+                <a href="{{ url_for('pres_data') }}">
+                    <div  class="data">Pressure <p id="pres">--</p></div>
+                </a>
+             </div>
+              <div class="box2">
+                <a href="{{ url_for('alt_data') }}"> 
+                    <div  class="data">Altitude <p id="alt">--</p></div> 
+                </a>
+                <a href="{{ url_for('hum_data') }}"> 
+                    <div  class="data">Humidity <p id="power">--</p></div> 
+                 </a>
+              </div>
+        </div>
+        </div>
+    <div class="infobox">
+        <div class="classknob">
+         <div id="knob-container1">
+            <p class="knob-title">Horizontal Position</p>
+            <div id="knob-pointer-path1">
+              <div id="knob-pointer1"></div>
+            </div>
+            <div id="knob-base1">
+              <div id="knob1"></div>
+            </div>
+            <div id="label-container1">
+              <div class="label left-label">-90°</div>
+              <div class="label top-label">0°</div>
+              <div class="label right-label">90°</div>
+            </div>
+          </div>
+          <p id="value-box1">0 &deg;</p>
+        </div>
+        <div class="classknob">
+         <div id="knob-container2">
+            <p class="knob-title">Vertical Position</p>
+            <div id="knob-pointer-path2">
+              <div id="knob-pointer2"></div>
+            </div>
+            <div id="knob-base2">
+              <div id="knob2"></div>
+            </div>
+            <div id="label-container2">
+              <div class="label left-label">-90°</div>
+              <div class="label top-label">0°</div>
+              <div class="label right-label">90°</div>
+            </div>
+          </div>
+          <p id="value-box2">0 &deg;</p>
+        </div>
+        </div>
+    </div>
+    <div id="sidebox">
+         <div id="fact" class="subbox">
+            <img src="../static/fact.png" alt="">
+         </div>
+         <div id="home" class="subbox">
+            <img src="../static/home.png" alt="">
+         </div>
+         <div id="hosp" class="subbox">
+            <img src="../static/hosp.png" alt="">
+         </div>
+    </div>
+ </div>
+    </body>
+    <script>
+        initBattery(0);
+
+function initBattery(bat){
+    const batteryLiquid = document.querySelector('.battery__liquid'),
+          batteryStatus = document.querySelector('.battery__status'),
+          batteryPercentage = document.querySelector('.battery__percentage')
+    
+    navigator.getBattery().then((batt) =>{
+        updateBattery = () =>{
+            /* 1. We update the number level of the battery */
+            // let level = Math.floor(batt.level * 100)
+            
+            charging = false;
+            level = bat;
+            batteryPercentage.innerHTML = level+ '%'
+
+            /* 2. We update the background level of the battery */
+            batteryLiquid.style.height = `${parseInt(level)}%`
+
+            /* 3. We validate full battery, low battery and if it is charging or not */
+            if(level == 100){ /* We validate if the battery is full */
+                batteryStatus.innerHTML = `Full battery <i class="ri-battery-2-fill green-color"></i>`
+                batteryLiquid.style.height = '103%' /* To hide the ellipse */
+            }
+            else if(level <= 20 &! charging){ /* We validate if the battery is low */
+                batteryStatus.innerHTML = `Low battery <i class="ri-plug-line animated-red"></i>`
+            }
+            else if(charging){ /* We validate if the battery is charging */
+                batteryStatus.innerHTML = `Charging... <i class="ri-flashlight-line animated-green"></i>`
+            }
+            else{ /* If it's not loading, don't show anything. */
+                batteryStatus.innerHTML = ''
+            }
+            
+            /* 4. We change the colors of the battery and remove the other colors */
+            if(level <=20){
+                batteryLiquid.classList.add('gradient-color-red')
+                batteryLiquid.classList.remove('gradient-color-orange','gradient-color-yellow','gradient-color-green')
+            }
+            else if(level <= 40){
+                batteryLiquid.classList.add('gradient-color-orange')
+                batteryLiquid.classList.remove('gradient-color-red','gradient-color-yellow','gradient-color-green')
+            }
+            else if(level <= 80){
+                batteryLiquid.classList.add('gradient-color-yellow')
+                batteryLiquid.classList.remove('gradient-color-red','gradient-color-orange','gradient-color-green')
+            }
+            else{
+                batteryLiquid.classList.add('gradient-color-green')
+                batteryLiquid.classList.remove('gradient-color-red','gradient-color-orange','gradient-color-yellow')
+            }
+        }
+        updateBattery()
+
+        /* 5. Battery status events */
+        batt.addEventListener('chargingchange', () => {updateBattery()})
+        batt.addEventListener('levelchange', () => {updateBattery()})
+       })
+     }
+     let valueH = 0;
+     let valueV = 0;
+        const knob_pointer1 = document.getElementById('knob-pointer1');
+        const knob_base1 = document.getElementById('knob-base1');
+        const knob1 = document.getElementById('knob1');
+        const value_box1 = document.getElementById('value-box1');
+
+        const knob_pointer2 = document.getElementById('knob-pointer2');
+        const knob_base2 = document.getElementById('knob-base2');
+        const knob2 = document.getElementById('knob2');
+        const value_box2 = document.getElementById('value-box2');
+
+    const min = 0;
+    const max = 100;
+    const full_action_angle = 270;
+    const start_angle = -135;
+    let t_alert=0;
+    let h_alert=0;
+    let a_alert=0;
+    let p_alert=0;
+
+    knob1.addEventListener('click', (e) => {
+      knob1.classList.toggle('on');
+      knob_base1.classList.toggle('on');
+      knob_pointer1.classList.toggle('on');
+      value_box1.classList.toggle('on');
+     
+    });
+    knob2.addEventListener('click', (e) => {
+      knob2.classList.toggle('on');
+      knob_base2.classList.toggle('on');
+      knob_pointer2.classList.toggle('on');
+      value_box2.classList.toggle('on');
+                let new_pos = valueH -  90;
+                knob_pointer2.style.transform = `rotateZ(${new_pos}deg)`;
+                value_box2.textContent = new_pos + '°';
+    });
+    function blinkAlert(ele,str){
+        alert(str)
+        ele.style.color = 'red';
+        ele.classList.add('blink');
+    }
+    function stopBlink(ele){
+        ele.style.color = 'white';
+        ele.classList.remove('blink');
+    }
+    let temp = document.getElementById('temp');
+    let pres = document.getElementById('pres');
+    let alt = document.getElementById('alt');
+    let hum = document.getElementById('power');
+    fetch('/datacsv')
+    .then(response => response.text())
+    .then(csvData => {
+    const lines = csvData.split('\n');
+    const lastLine = lines.slice(-1); // Get the last 10 lines of the CSV
+
+    // console.log(lastLine);
+      const fields = lastLine[0].split(',');
+    //   return fields[2]; // Get the value of the third field
+      
+      pres.innerHTML = fields[1] + ' daPA';  
+      pres.style.fontSize = '25px';
+      temp.innerHTML = fields[5] + ' &deg' + 'C';
+      hum.innerHTML  = fields[6];
+      alt.innerHTML  = fields[6] + 'm';
+      valueH = fields[1]
+        let new_pos =  valueH - 90; 
+        pres.style.fontSize = '24px';
+        // console.log(new_pos);
+        knob_pointer1.style.transform = `rotateZ(${new_pos}deg)`;
+        value_box1.textContent = new_pos + '°';
+
+        valueV = fields[1]
+        let new_pos2 = valueV -  90;
+        // console.log(new_pos);
+        knob_pointer2.style.transform = `rotateZ(${new_pos2}deg)`;
+        value_box2.textContent = new_pos2 + '°';
+
+        let batt = parseInt(fields[1]*100/3.7)
+        initBattery(batt);
+
+            if(fields[5] < 25 && t_alert == 0){
+                t_alert = 1;
+                blinkAlert(temp.parentElement,"Low Temperature!");
+            }
+            else if(fields[5] > 25){
+                t_alert = 0;
+                stopBlink(temp.parentElement);
+            }
+
+            if(fields[1] < 25 && t_alert == 0){
+                p_alert = 1;
+                blinkAlert(pres.parentElement,"Low Pressure!");
+            }
+            else if(fields[1] > 25){
+                p_alert = 0;
+                stopBlink(pres.parentElement);
+            }
+
+            if(fields[6] < 25 && t_alert == 0){
+                a_alert = 1;
+                blinkAlert(alt.parentElement,"Low Altitude!");
+            }
+            else if(fields[6] > 25){
+                a_alert = 0;
+                stopBlink(alt.parentElement);
+            }
+
+            if(fields[6] < 25 && t_alert == 0){
+                h_alert = 1;
+                blinkAlert(hum.parentElement,"Low Humidity!");
+            }
+            else if(fields[6] > 25){
+                h_alert = 0;
+                stopBlink(hum.parentElement);
+            }
+     })
+    .catch(error => {
+    console.error('Error:', error);
+    });
+
+    </script>
+</html>

@@ -1,0 +1,3595 @@
+{
+	"info": {
+		"_postman_id": "75bdde63-6cba-47dc-b5c9-c87808a00270",
+		"name": "OM2M REST APIs",
+		"description": "The collection contains API requests samples to send HTTP request (GET, POST, UPDATE, DELETE) to the OM2M platform. ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API-Retrieval",
+			"item": [
+				{
+					"name": "Retrieve Data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5091/ngsi-ld/v1/entities/Node-1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5091",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"Node-1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create Application Entity",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:ae\":{\n        \"rn\": \"SOLAR-OPTIMISATION\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"rr\": false,\n        \"api\": \"SOLAR-OPTIMISATION\"\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        
+		{
+			"name": "Create Temp Container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Temp\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Create Pressure Container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Pressure\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Create Humidity Container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Humidity\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION"
+					]
+				}
+			},
+			"response": []
+		},
+		
+		{
+			"name": "Create Altitude Container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Altitude\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Create Current-1 Container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Current-1\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Create Current-2 Container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Current-2\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Create Voltage-1 Container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Voltage-1\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Create Voltage-2 Container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Voltage-2\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION"
+					]
+				}
+			},
+			"response": []
+		},
+        
+		{
+			"name": "create descriptor cnt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Temp/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Temp",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create descriptor cnt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Pressure/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Pressure",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create descriptor cnt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Humidity/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Humidity",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		
+		{
+			"name": "create descriptor cnt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Altitude/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Altitude",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create descriptor cnt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create descriptor cnt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create descriptor cnt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create descriptor cnt",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Descriptor\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5000\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        
+		{
+			"name": "Create Data container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Data\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Temp/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Temp",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Create Data container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Data\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Pressure/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Pressure",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Create Data container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Data\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Humidity/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Humidity",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		
+		{
+			"name": "Create Data container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Data\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Altitude/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Altitude",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Create Data container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Data\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Create Data container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Data\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Create Data container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Data\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Create Data container",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"rn\": \"Data\",\n        \"lbl\": [\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"mni\": 5\n\n    }\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        
+		{
+			"name": "create descriptor cin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cin\":{\n        \"lbl\":[\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"con\":\"[Timestamp, Occupancy-State, Distance]\"\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Temp/Descriptor/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Temp",
+						"Descriptor",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create descriptor cin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cin\":{\n        \"lbl\":[\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"con\":\"[Timestamp, Occupancy-State, Distance]\"\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Pressure/Descriptor/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Pressure",
+						"Descriptor",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create descriptor cin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cin\":{\n        \"lbl\":[\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"con\":\"[Timestamp, Occupancy-State, Distance]\"\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Humidity/Descriptor/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Humidity",
+						"Descriptor",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		
+		{
+			"name": "create descriptor cin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cin\":{\n        \"lbl\":[\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"con\":\"[Timestamp, Occupancy-State, Distance]\"\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Altitude/Descriptor/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Altitude",
+						"Descriptor",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create descriptor cin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cin\":{\n        \"lbl\":[\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"con\":\"[Timestamp, Occupancy-State, Distance]\"\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-1/Descriptor/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-1",
+						"Descriptor",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create descriptor cin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cin\":{\n        \"lbl\":[\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"con\":\"[Timestamp, Occupancy-State, Distance]\"\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-2/Descriptor/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-2",
+						"Descriptor",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create descriptor cin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cin\":{\n        \"lbl\":[\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"con\":\"[Timestamp, Occupancy-State, Distance]\"\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-1/Descriptor/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-1",
+						"Descriptor",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create descriptor cin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cin\":{\n        \"lbl\":[\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"con\":\"[Timestamp, Occupancy-State, Distance]\"\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-2/Descriptor/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-2",
+						"Descriptor",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        
+		{
+			"name": "Create Content Instance-1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cin\":{\n        \"lbl\":[\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"con\":\"[test_timestamp_1,test_occupancy_1, test_distance_1]\"\n\n    }\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Node-1/Data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Node-1",
+						"Data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Content Instance-2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cin\":{\n        \"lbl\":[\n            \"Label-1\",\n            \"Label-2\"\n        ],\n        \"con\":\"[test_timestamp_2,test_occupancy_2, test_distance_2]\"\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Node-1/Data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Node-1",
+						"Data"
+					]
+				}
+			},
+			"response": []
+		},
+        
+		{
+			"name": "Get latest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Temp/Data/la",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Temp",
+						"Data",
+						"la"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get latest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Pressure/Data/la",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Pressure",
+						"Data",
+						"la"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get latest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Humidity/Data/la",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Humidity",
+						"Data",
+						"la"
+					]
+				}
+			},
+			"response": []
+		},
+		
+		{
+			"name": "Get latest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Altitude/Data/la",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Altitude",
+						"Data",
+						"la"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get latest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-1/Data/la",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-1",
+						"Data",
+						"la"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get latest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-2/Data/la",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-2",
+						"Data",
+						"la"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get latest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-1/Data/la",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-1",
+						"Data",
+						"la"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get latest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-2/Data/la",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-2",
+						"Data",
+						"la"
+					]
+				}
+			},
+			"response": []
+		},
+        
+		{
+			"name": "Get oldest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Temp/Data/ol",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Temp",
+						"Data",
+						"ol"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get oldest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Pressure/Data/ol",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Pressure",
+						"Data",
+						"ol"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get oldest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Humidity/Data/ol",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Humidity",
+						"Data",
+						"ol"
+					]
+				}
+			},
+			"response": []
+		},
+		
+		{
+			"name": "Get oldest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Altitude/Data/ol",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Altitude",
+						"Data",
+						"ol"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get oldest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-1/Data/ol",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-1",
+						"Data",
+						"ol"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get oldest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-2/Data/ol",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-2",
+						"Data",
+						"ol"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get oldest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-1/Data/ol",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-1",
+						"Data",
+						"ol"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get oldest content Instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"type": "text",
+						"value": "guest:guest"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-2/Data/ol",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-2",
+						"Data",
+						"ol"
+					]
+				}
+			},
+			"response": []
+		},
+        
+		{
+			"name": "Get all data of a container",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Temp/Data?rcn=4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Temp",
+						"Data"
+					],
+					"query": [
+						{
+							"key": "rcn",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get all data of a container",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Pressure/Data?rcn=4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Pressure",
+						"Data"
+					],
+					"query": [
+						{
+							"key": "rcn",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get all data of a container",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Humidity/Data?rcn=4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Humidity",
+						"Data"
+					],
+					"query": [
+						{
+							"key": "rcn",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		
+		{
+			"name": "Get all data of a container",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Altitude/Data?rcn=4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Altitude",
+						"Data"
+					],
+					"query": [
+						{
+							"key": "rcn",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get all data of a container",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-1/Data?rcn=4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-1",
+						"Data"
+					],
+					"query": [
+						{
+							"key": "rcn",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get all data of a container",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-2/Data?rcn=4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-2",
+						"Data"
+					],
+					"query": [
+						{
+							"key": "rcn",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get all data of a container",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-1/Data?rcn=4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-1",
+						"Data"
+					],
+					"query": [
+						{
+							"key": "rcn",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Get all data of a container",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-2/Data?rcn=4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-2",
+						"Data"
+					],
+					"query": [
+						{
+							"key": "rcn",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+        
+		{
+			"name": "update cnt attrs",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"lbl\": [\n            \"Label-3\",\n            \"Label-4\"\n        ],\n        \"mni\": 10\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Temp/Data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Temp",
+						"Data"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "update cnt attrs",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"lbl\": [\n            \"Label-3\",\n            \"Label-4\"\n        ],\n        \"mni\": 10\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Pressure/Data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Pressure",
+						"Data"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "update cnt attrs",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"lbl\": [\n            \"Label-3\",\n            \"Label-4\"\n        ],\n        \"mni\": 10\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Humidity/Data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Humidity",
+						"Data"
+					]
+				}
+			},
+			"response": []
+		},
+		
+		{
+			"name": "update cnt attrs",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"lbl\": [\n            \"Label-3\",\n            \"Label-4\"\n        ],\n        \"mni\": 10\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Altitude/Data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Altitude",
+						"Data"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "update cnt attrs",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"lbl\": [\n            \"Label-3\",\n            \"Label-4\"\n        ],\n        \"mni\": 10\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-1/Data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-1",
+						"Data"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "update cnt attrs",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"lbl\": [\n            \"Label-3\",\n            \"Label-4\"\n        ],\n        \"mni\": 10\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-2/Data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-2",
+						"Data"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "update cnt attrs",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"lbl\": [\n            \"Label-3\",\n            \"Label-4\"\n        ],\n        \"mni\": 10\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-1/Data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-1",
+						"Data"
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "update cnt attrs",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=3",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:cnt\":{\n        \"lbl\": [\n            \"Label-3\",\n            \"Label-4\"\n        ],\n        \"mni\": 10\n\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-2/Data",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-2",
+						"Data"
+					]
+				}
+			},
+			"response": []
+		},
+        
+		{
+			"name": "create subs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=23",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:sub\": {\n        \"rn\": \"SUB-DW\",\n        \"nu\": \"http://localhost:5091/\",\n        \"nct\": \"2\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Temp/Data/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Temp",
+						"Data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create subs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=23",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:sub\": {\n        \"rn\": \"SUB-DW\",\n        \"nu\": \"http://localhost:5091/\",\n        \"nct\": \"2\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Pressure/Data/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Pressure",
+						"Data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create subs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=23",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:sub\": {\n        \"rn\": \"SUB-DW\",\n        \"nu\": \"http://localhost:5091/\",\n        \"nct\": \"2\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Humidity/Data/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Humidity",
+						"Data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		
+		{
+			"name": "create subs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=23",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:sub\": {\n        \"rn\": \"SUB-DW\",\n        \"nu\": \"http://localhost:5091/\",\n        \"nct\": \"2\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Altitude/Data/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Altitude",
+						"Data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create subs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=23",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:sub\": {\n        \"rn\": \"SUB-DW\",\n        \"nu\": \"http://localhost:5091/\",\n        \"nct\": \"2\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-1/Data/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-1",
+						"Data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create subs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=23",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:sub\": {\n        \"rn\": \"SUB-DW\",\n        \"nu\": \"http://localhost:5091/\",\n        \"nct\": \"2\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Current-2/Data/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Current-2",
+						"Data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create subs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=23",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:sub\": {\n        \"rn\": \"SUB-DW\",\n        \"nu\": \"http://localhost:5091/\",\n        \"nct\": \"2\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-1/Data/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-1",
+						"Data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "create subs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;ty=23",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"m2m:sub\": {\n        \"rn\": \"SUB-DW\",\n        \"nu\": \"http://localhost:5091/\",\n        \"nct\": \"2\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION/Voltage-2/Data/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION",
+						"Voltage-2",
+						"Data",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        
+		{
+			"name": "delete resource",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name/SOLAR-OPTIMISATION",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name",
+						"SOLAR-OPTIMISATION"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Experiment Data",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-M2M-Origin",
+						"value": "admin:admin",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:5089/~/in-cse/in-name?rcn=4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5089",
+					"path": [
+						"~",
+						"in-cse",
+						"in-name"
+					],
+					"query": [
+						{
+							"key": "rcn",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

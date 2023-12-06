@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voltage Readings</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="panelState.css">
+  <link rel="stylesheet" href="rotation.css">
+</head>
+  <style>
+    body{
+        margin:0px 0px;
+        padding:0px 0px;
+        background-color: #414f55;
+    }
+    .content{
+        display:flex;
+    }
+    #chart_container{
+        display:flex;
+        flex-direction: column;
+        margin:auto;
+        height:1000px;
+        width:90%;
+    }
+    #start-input,#end-input,#fetch-button{
+        width:20%;
+        margin:10px 55px;
+        height:25px;
+        padding:5px 15px;
+        border-radius: 5px;
+    }
+    #fetch-button{
+        height:35px;
+        font-size: 17px;
+    }
+    #chart{
+        margin:0px 70px;
+        max-width: 90%;
+        height:700px;
+    }
+    .navbar {
+      width: 200px;
+      height:100vh;
+      background-color: #3884ca;
+    }
+    
+    /* Navbar links */
+    .navbar a {
+      display: block;
+      padding: 12px;
+      text-decoration: none;
+      color: #000;
+    }
+    #chart-search{
+      display:flex;
+      width:80%;
+      margin:10px auto;
+    }
+    /* Navbar links on hover */
+    .navbar a:hover {
+       background-color: #7da5ca;
+    }
+    #stop{
+      display:flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #stop .button{
+      margin:10px;
+      padding:8px 16px;
+      border-radius: 4px;
+      background-color: skyblue;
+      box-shadow: 1px 1px 10px rgba(72, 68, 68, 0.897);
+      cursor:pointer;
+    }
+    #stop .button:hover{
+      filter: brightness(80%);
+      box-shadow: 1px 1px 10px black;
+    }
+  </style>
+<body>
+<div class="content">
+    <div class="navbar">
+      <a href="Currentdata.html">Current Readings</a>
+      <a href="Voltagedata.html">Voltage Readings</a>
+      <a href="pastdata.html">Past Data</a>
+      <a href="panelState.html">Panel</a>
+    </div>
+    <div id="chart_container">
+    <div id="stop">
+        <button class="button">STOP</button>
+    </div>
+    <canvas id="chart"></canvas>
+    </div>
+</div>
+  <script>
+    var jsonData;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchData();
+    });
+    var T=setTimeout(()=>{
+            location.reload();
+        },10000);
+    var button=document.querySelector('.button')
+    button.addEventListener("click",()=>{
+            if(button.innerHTML==='STOP'){
+                clearTimeout(T);
+                button.innerHTML="START";
+            }
+            else if(button.innerHTML==='START'){
+                T=setTimeout(()=>{
+                    location.reload();
+                },10000);
+                button.innerHTML="STOP";
+            }
+      });
+      function convertToURLFormat(dateTimeString) {
+      var parts = dateTimeString.split('T');
+      var datePart = parts[0];
+      var e = parts[1].split(':');
+      var min = parseInt(e[1]) + 30;
+      var tmp = min/60;
+      var hours = parseInt(e[0]) + 5 + parseInt(tmp);
+      if(hours < 10) hours = '0' + hours;
+      var tmp2 = min % 60;
+      if(tmp2 < 10) tmp2 = '0' + tmp2;
+      var formattedDateTime = datePart + 'T' + hours + ':' + tmp2 + ':' + e[2];
+      return formattedDateTime;
+      }
+
+       function fetchData() {
+      var xhr = new XMLHttpRequest();
+      var container = document.getElementById('chart');
+      xhr.open("GET", "https://api.thingspeak.com/channels/2163205/fields/5.json?results=50", true);    
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+         jsonData = JSON.parse(xhr.responseText);
+          // Process the JSON data here
+          console.log(jsonData);
+            var field1Values = [];
+            var timestamps = [];
+
+            jsonData.feeds.forEach(function(feed) {
+            if (feed.field5 !== null) {
+                field1Values.push(parseFloat(feed.field5));
+            } else {
+                field1Values.push(null);
+            }
+            timestamps.push(convertToURLFormat(feed.created_at));
+            });
+            console.log(field1Values);
+            container.style.backgroundColor = 'rgb(203 218 222)';
+            var ctx = document.getElementById('chart').getContext('2d');
+            var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timestamps,
+                datasets: [{
+                label: 'Voltage Values',
+                data: field1Values,
+                fill: false,
+                borderColor: 'orange',
+                backgroundColor: 'orange',
+                tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                x: {
+                    display: true,
+                    title: {
+                    display: true,
+                    text: 'Timestamp',
+                    color: 'black'
+                    },
+                    ticks: {
+                      color: 'black'
+                    }
+                },
+                y: {
+                    display: true,
+                    title: {
+                    display: true,
+                    text: 'Voltage',
+                    color:'black'
+                    },
+                    ticks: {
+                      color:'black'
+                    }
+                    
+                }
+                }
+            }
+            });
+        }
+      };
+      xhr.send();
+    }
+
+   
+  </script>
+</body>
+</html>

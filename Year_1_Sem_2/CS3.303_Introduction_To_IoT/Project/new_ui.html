@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <style>
+        body {
+            background-color: #f3f4f7;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            display:flex;
+            column-gap: 50px;
+            max-width:100%;
+            margin: 30px;
+            padding: 120px 30px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333333;
+        }
+        
+        #myChart1 {
+            margin:0px 70px;
+            max-width: 40%;
+            height:700px;
+        }
+        #myChart2{
+            margin:0px 70px;
+            max-width: 40%;
+            height:700px;
+        }
+    </style>
+    <title>Custom graph</title>
+</head>
+<body>
+    <div class="container">
+        <canvas id="myChart1"></canvas>
+        <canvas id="myChart2"></canvas>
+    </div>
+    <div class="value-test">
+        The current values for ameya and tanay are: 
+    </div>
+    <div class="start/stop">
+        <button class="button">STOP</button>
+    </div>
+    <script>
+        $(document).ready(function() {
+            function getData() {
+                var url = "https://api.thingspeak.com/channels/2163205/fields/1,2.json?api_key=B8D0XWNFHM7DULX&results=8";
+                $.getJSON(url, function(data) {
+                    var field1Values = [];
+                    var field2Values = [];
+                    var timestamps = [];
+                    
+                    $.each(data.feeds, function(index, feed) {
+                        field1Values.push(feed.field1);
+                        field2Values.push(feed.field2);
+                        timestamps.push(feed.created_at);
+                    });
+                    document.querySelector(".value-test").innerHTML+=`${field1Values[field1Values.length-1]},${field2Values[field2Values.length-1]}`;
+                    var ctx = document.getElementById('myChart1').getContext('2d');
+
+                    var chart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: timestamps,
+                            datasets: [{
+                                label: 'topl',
+                                data: field1Values,
+                                borderColor: 'yellow',
+                                backgroundColor: 'yellow',
+                                borderWidth: 1,
+                                fill: false
+                            },
+                            {
+                                label: 'topr',
+                                data: field2Values,
+                                borderColor: 'green',
+                                backgroundColor: 'green',
+                                borderWidth: 1,
+                                fill: false
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            legend: {
+                                display: false
+                            },
+                            plugins: {
+                                zoom: {
+                                pan: {
+                                    enabled: true,
+                                    mode: 'xAxes',
+                                    speed: 10,
+                                    threshold: 10
+                                },
+                                zoom: {
+                                    enabled: true,
+                                    mode: 'xAxes',
+                                    speed: 0.1
+                                }
+                                },
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    },
+                                    scaleLabel: {
+                                        display:true,
+                                        labelString: "Value"
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    },
+                                    scaleLabel: {
+                                        display:true,
+                                        labelString: "TimeStamp"
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                });
+            }
+
+            getData();
+        });
+        var T=setTimeout(()=>{
+            location.reload();
+        },15000);
+        var button=document.querySelector('.button')
+        button.addEventListener("click",()=>{
+            if(button.innerHTML==='STOP'){
+                clearTimeout(T);
+                button.innerHTML="START";
+            }
+            else{
+                T=setTimeout(()=>{
+                    location.reload();
+                },15000);
+                button.innerHTML="STOP";
+            }
+        })
+        // $(document).ready(function() {
+        //     function getData() {
+        //         var url = "https://api.thingspeak.com/channels/2163205/fields/2.json?api_key=B8D0XWNFHM7DULX&results=8";
+        //         $.getJSON(url, function(data) {
+        //             var field1Values = [];
+        //             var field2Values = [];
+        //             var timestamps = [];
+
+        //             $.each(data.feeds, function(index, feed) {
+        //                 field1Values.push(feed.field1);
+        //                 field2Values.push(feed.field2);
+        //                 timestamps.push(feed.created_at);
+        //             });
+
+        //             var ctx = document.getElementById('myChart2').getContext('2d');
+
+        //             var chart = new Chart(ctx, {
+        //                 type: 'line',
+        //                 data: {
+        //                     labels: timestamps,
+        //                     datasets: [{
+        //                         label: 'topl',
+        //                         data: field1Values,
+        //                         borderColor: 'black',
+        //                         backgroundColor: '#84bd00',
+        //                         borderWidth: 1,
+        //                         fill: false
+        //                     },
+        //                     {
+        //                         label: 'topr',
+        //                         data: field2Values,
+        //                         borderColor: 'green',
+        //                         backgroundColor: '#00205b',
+        //                         borderWidth: 1,
+        //                         fill: false
+        //                     }]
+        //                 },
+        //                 options: {
+        //                     responsive: true,
+        //                     maintainAspectRatio: false,
+        //                     legend: {
+        //                         display: false
+        //                     },
+        //                     scales: {
+        //                         yAxes: [{
+        //                             ticks: {
+        //                                 beginAtZero: true
+        //                             }
+        //                         }]
+        //                     }
+        //                 }
+        //             });
+        //         });
+        //     }
+
+        //     getData();
+        // });
+    </script>
+</body>
+</html>

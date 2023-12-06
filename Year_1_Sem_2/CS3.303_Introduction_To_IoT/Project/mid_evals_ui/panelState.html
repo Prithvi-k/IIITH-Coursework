@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+        <link rel="stylesheet" href="panelState.css">
+        <link rel="stylesheet" href="rotation.css">
+        <title>Panel</title>
+    </head>
+    <style>
+         body{
+            background-color: #414f55;
+         }
+         .content{
+            display:flex;
+         }
+         .infobox{
+            display:flex;
+
+         }
+         .navbar {
+            width: 200px;
+            height:100vh;
+            background-color: #3884ca;
+            }
+            
+            /* Navbar links */
+            .navbar a {
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+            color: #000;
+        }
+        .navbar a:hover {
+            background-color: #7da5ca;
+        }
+        .contentbox{
+            width:80%;
+        }
+        .infobox{
+            /* width:100%; */
+            display:flex;
+            padding:20px 0px;
+            padding-top:50px;
+            margin:50px 100px;
+            border-radius: 35px;
+            background-color: rgb(114 123 125 / 49%);
+            box-shadow: 3px 3px 14px rgba(0, 0, 0, 0.488);
+        }
+        .infobox .classknob{
+            margin:0px 150px;
+        }
+        .batterybox{
+            background-color: rgb(114 123 125 / 49%);
+            box-shadow: 3px 3px 14px rgba(0, 0, 0, 0.488);
+            border-radius: 35px;
+            display:flex;
+            margin:50px 100px;
+            align-items: center;
+            justify-content: center;
+        }
+        .battery{
+            margin:30px 130px;
+        }
+        .databox{
+           display:flex;
+           border-radius: 35px;
+           background-color: black;
+           padding:30px;
+           margin:30px 130px;
+        }
+        .box2{
+            display:flex;
+            flex-direction: column;
+        }
+        .databox .data{
+           border-radius: 10px;
+           margin:22px;
+           font-size:18px;
+           /* width:90%; */
+           width:180px;
+           padding:18px;
+           background-color: rgba(128, 128, 128, 0.518);
+           padding:15px;
+        }
+        .data p{
+           font-size:31px;
+           font-weight: bolder;
+        }
+        .knob-title{
+            transform: translateY(-220px);
+            font-size: 25px;
+            color:black;
+        }
+    </style>
+    <body>
+    <div class="content">
+        <div class="navbar">
+            <a href="Voltagedata.html" onclick="fetchData()">Voltage Readings</a>
+            <a href="Currentdata.html" onclick="fetchData()">Current Readings</a>
+            <a href="pastdata.html"  onclick="fetchPastData()">Past Data</a>
+            <a href="panelState.html">Panel</a>
+         </div>
+        <!--=============== BATTERY ===============-->
+     <div class="contentbox">
+        <div class="batterybox">
+          <div class="battery">
+            <div class="battery__card">
+                <div class="battery__data">
+                    <p class="battery__text">Battery</p>
+                    <h1 class="battery__percentage">
+                       0%
+                    </h1>
+
+                    <p class="battery__status">
+                        Low battery <i class="ri-plug-line"></i>
+                    </p>
+                </div>
+
+                <div class="battery__pill">
+                    <div class="battery__level">
+                        <div class="battery__liquid"></div>
+                    </div>
+                </div>
+            </div>
+         </div>
+        <div class="databox">
+             <div class="box2">
+                <div  class="data">Temperature <p id="temp">--</p></div>
+                <div  class="data">Pressure <p id="pres">--</p></div>
+             </div>
+              <div class="box2">
+                 <div  class="data">Altitude <p id="alt">--</p></div>
+                 <div  class="data">Power <p id="power">--</p></div>
+              </div>
+        </div>
+        </div>
+    <div class="infobox">
+        <div class="classknob">
+         <div id="knob-container1">
+            <p class="knob-title">Horizontal Position</p>
+            <div id="knob-pointer-path1">
+              <div id="knob-pointer1"></div>
+            </div>
+            <div id="knob-base1">
+              <div id="knob1"></div>
+            </div>
+            <div id="label-container1">
+              <div class="label left-label">-90°</div>
+              <div class="label top-label">0°</div>
+              <div class="label right-label">90°</div>
+            </div>
+          </div>
+          <p id="value-box1">0 &deg;</p>
+        </div>
+        <div class="classknob">
+         <div id="knob-container2">
+            <p class="knob-title">Vertical Position</p>
+            <div id="knob-pointer-path2">
+              <div id="knob-pointer2"></div>
+            </div>
+            <div id="knob-base2">
+              <div id="knob2"></div>
+            </div>
+            <div id="label-container2">
+              <div class="label left-label">-90°</div>
+              <div class="label top-label">0°</div>
+              <div class="label right-label">90°</div>
+            </div>
+          </div>
+          <p id="value-box2">0 &deg;</p>
+        </div>
+        </div>
+    </div>
+ </div>
+    </body>
+    <script>
+        initBattery();
+        fetchHorData();
+        fetchVerData();
+        setInterval(fetchOtherData,1000);
+        setInterval(fetchHorData,10);
+        setInterval(fetchVerData,10);
+
+function initBattery(){
+    const batteryLiquid = document.querySelector('.battery__liquid'),
+          batteryStatus = document.querySelector('.battery__status'),
+          batteryPercentage = document.querySelector('.battery__percentage')
+    
+    navigator.getBattery().then((batt) =>{
+        updateBattery = () =>{
+            /* 1. We update the number level of the battery */
+            // let level = Math.floor(batt.level * 100)
+            
+            charging = false;
+            level = 89;
+            batteryPercentage.innerHTML = level+ '%'
+
+            /* 2. We update the background level of the battery */
+            batteryLiquid.style.height = `${parseInt(level)}%`
+
+            /* 3. We validate full battery, low battery and if it is charging or not */
+            if(level == 100){ /* We validate if the battery is full */
+                batteryStatus.innerHTML = `Full battery <i class="ri-battery-2-fill green-color"></i>`
+                batteryLiquid.style.height = '103%' /* To hide the ellipse */
+            }
+            else if(level <= 20 &! charging){ /* We validate if the battery is low */
+                batteryStatus.innerHTML = `Low battery <i class="ri-plug-line animated-red"></i>`
+            }
+            else if(charging){ /* We validate if the battery is charging */
+                batteryStatus.innerHTML = `Charging... <i class="ri-flashlight-line animated-green"></i>`
+            }
+            else{ /* If it's not loading, don't show anything. */
+                batteryStatus.innerHTML = ''
+            }
+            
+            /* 4. We change the colors of the battery and remove the other colors */
+            if(level <=20){
+                batteryLiquid.classList.add('gradient-color-red')
+                batteryLiquid.classList.remove('gradient-color-orange','gradient-color-yellow','gradient-color-green')
+            }
+            else if(level <= 40){
+                batteryLiquid.classList.add('gradient-color-orange')
+                batteryLiquid.classList.remove('gradient-color-red','gradient-color-yellow','gradient-color-green')
+            }
+            else if(level <= 80){
+                batteryLiquid.classList.add('gradient-color-yellow')
+                batteryLiquid.classList.remove('gradient-color-red','gradient-color-orange','gradient-color-green')
+            }
+            else{
+                batteryLiquid.classList.add('gradient-color-green')
+                batteryLiquid.classList.remove('gradient-color-red','gradient-color-orange','gradient-color-yellow')
+            }
+        }
+        updateBattery()
+
+        /* 5. Battery status events */
+        batt.addEventListener('chargingchange', () => {updateBattery()})
+        batt.addEventListener('levelchange', () => {updateBattery()})
+       })
+     }
+     let valueH = 0;
+     let valueV = 0;
+        const knob_pointer1 = document.getElementById('knob-pointer1');
+        const knob_base1 = document.getElementById('knob-base1');
+        const knob1 = document.getElementById('knob1');
+        const value_box1 = document.getElementById('value-box1');
+
+        const knob_pointer2 = document.getElementById('knob-pointer2');
+        const knob_base2 = document.getElementById('knob-base2');
+        const knob2 = document.getElementById('knob2');
+        const value_box2 = document.getElementById('value-box2');
+
+     function fetchHorData() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://api.thingspeak.com/channels/2163205/fields/6.json?results=1`", true);    
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+         jsonData = JSON.parse(xhr.responseText);
+            var field1Values = [];
+          
+            jsonData.feeds.forEach(function(feed) {
+            if (feed.field6 !== null) {
+                valueH = parseInt(feed.field6);
+                let new_pos =  valueH - 90;
+                // console.log(new_pos);
+                knob_pointer1.style.transform = `rotateZ(${new_pos}deg)`;
+                value_box1.textContent = new_pos + '°';
+            } else {
+                field1Values.push(null);
+            }
+            });
+        }
+      };
+      xhr.send();
+    }
+     function fetchVerData() {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://api.thingspeak.com/channels/2163205/fields/7.json?results=1`", true);    
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+         jsonData = JSON.parse(xhr.responseText);
+            var field1Values = [];
+
+            jsonData.feeds.forEach(function(feed) {
+            if (feed.field7 !== null) {
+                valueV = parseInt(feed.field7);
+                let new_pos = valueV -  90;
+                // console.log(new_pos);
+                knob_pointer2.style.transform = `rotateZ(${new_pos}deg)`;
+                value_box2.textContent = new_pos + '°';
+            } else {
+                field1Values.push(null);
+            }
+            });
+        }
+      };
+      xhr.send();
+    }
+
+    const min = 0;
+    const max = 100;
+    const full_action_angle = 270;
+    const start_angle = -135;
+
+    knob1.addEventListener('click', (e) => {
+      knob1.classList.toggle('on');
+      knob_base1.classList.toggle('on');
+      knob_pointer1.classList.toggle('on');
+      value_box1.classList.toggle('on');
+     
+    });
+    knob2.addEventListener('click', (e) => {
+      knob2.classList.toggle('on');
+      knob_base2.classList.toggle('on');
+      knob_pointer2.classList.toggle('on');
+      value_box2.classList.toggle('on');
+                let new_pos = valueH -  90;
+                knob_pointer2.style.transform = `rotateZ(${new_pos}deg)`;
+                value_box2.textContent = new_pos + '°';
+    });
+
+    let temp = document.getElementById('temp');
+    let pres = document.getElementById('pres');
+    let alt = document.getElementById('alt');
+    let power = document.getElementById('power');
+    function fetchOtherData() {
+      var xhr = new XMLHttpRequest();
+      var container = document.getElementById('chart');
+      xhr.open("GET", "https://api.thingspeak.com/channels/2163205/fields/1,2,3,4,5.json?results=1`", true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+         jsonData = JSON.parse(xhr.responseText);
+         console.log(jsonData);
+
+            jsonData.feeds.forEach(function(feed) {
+            if (feed.field1 !== null) {
+                temp.innerHTML = parseFloat(feed.field1).toFixed(1) + '&deg C';
+            }
+            if (feed.field3 !== null) {
+                alt.innerHTML = parseFloat(feed.field3).toFixed(1) + ' m'
+            }
+            if (feed.field2 !== null) {
+                pres.innerHTML = parseFloat(feed.field2).toFixed(1) + ' daPA';
+                pres.style.fontSize = '24px';
+            }
+            if (feed.field4 !== null && feed.field5 != null) {
+                power.innerHTML = (parseFloat(feed.field4)*parseFloat(feed.field5)).toFixed(1) + ' W';
+            }
+            });
+        }
+      };
+      xhr.send();
+    }
+   
+
+     
+    </script>
+</html>
