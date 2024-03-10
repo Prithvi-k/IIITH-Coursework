@@ -1,20 +1,20 @@
+// ROI - Region of Interest i.e. Bangalore
 Map.addLayer(ROI)
-Map.centerObject(ROI, 10) // 10 sets it to center the ROI
+Map.centerObject(ROI, 10)
 
-var L9 = ee.ImageCollection("LANDSAT/LC09/C02/T1_TOA") // Grab data from Landsat
-// var L9 = ee.ImageCollection("LANDSAT/LC09/C02/T1_L2") // Grab data from Landsat
+// L9 - Landsat 9 Data
+var image = L9.filterBounds(ROI).filterDate('2023-01-01', '2023-12-31').filterMetadata('CLOUD_COVER', 'less_than', 1).median().clip(ROI)
 
-var image = L9.filterBounds(ROI).filterDate('2022-03-01', '2022-03-31').filterMetadata('CLOUD_COVER', 'less_than', 1).median().clip(ROI)
+Map.addLayer(image)
 
-Map.addLayer(image, imageVisParam)
-
-var sample = BuiltupArea.merge(CropLand).merge(ScrubArea).merge(Waterbodies).merge(HarvestedCrop);
+var sample = BuiltupArea.merge(Other);
 
 print(sample);
 
 var bands = ['B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7']
 var classProperty = 'Class'
 
+// Creating training data
 var training = image.select(bands).sampleRegions({
     collection: sample,
     properties: [classProperty],
@@ -23,6 +23,7 @@ var training = image.select(bands).sampleRegions({
 
 print(training);
 
+// Training the classifier
 var classifier = ee.Classifier.smileCart().train({
     features: training,
     classProperty: classProperty,
@@ -33,8 +34,9 @@ print(classifier.getInfo());
 
 var classified = image.select(bands).classify(classifier);
 
-Map.addLayer(classified, { min: 0, max: 4, pallette: ['blue', 'green', 'yellow', 'red', 'magenta'] });
+Map.addLayer(classified, { min: 0, max: 1, pallette: ['blue', 'green', 'yellow', 'red', 'magenta'] });
 
+// Creating smaller dataset
 var withRandom = training.randomColumn('random');
 
 var split = 0.7;
@@ -51,11 +53,27 @@ var test = testingPartition.classify(trainedClassifier);
 
 var confusionMatrix = test.errorMatrix(classProperty, 'classified');
 
-print('Confusion Matrix', confusionMatrix);
+print('Confusion Matrix 1', confusionMatrix);
 
+// Accuracy Assessment
+var sample_rc = training.randomColumn('rand');
+var training = sample_rc.filter(ee.Filter.lt('rand', 0.7));
+var validation = sample_rc.filter(ee.Filter.gte('rand', 0.7));
+
+var confusionMatrix = ee.ConfusionMatrix(validation.classify(classifier).errorMatrix(
+    {
+        actual: classProperty,
+        predicted: 'classification'
+    }
+));
+
+print('Confusion Matrix', confusionMatrix);
+print('Overall Accuracy', confusionMatrix.accuracy());
+
+// Exporting the classified image
 Export.image.toDrive({
     image: classified,
-    description: 'LULC',
+    description: 'Bangalore-2023-Classified',
     maxPixels: 1e13,
     region: ROI,
     scale: 30
